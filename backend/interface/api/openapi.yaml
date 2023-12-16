@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: Wine Century Backend Code
+  description: backend code for the wine century website
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /admin/login:
+    post:
+      summary: Login as an admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminLoginRequest'
+      responses:
+        '200':
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/AdminLoginResponse'
+
+components:
+  schemas:
+    AdminLoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Admin username
+        password:
+          type: string
+          description: Admin password
+      required:
+        - username
+        - password
+
+    AdminLoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Bearer Token for API Use
