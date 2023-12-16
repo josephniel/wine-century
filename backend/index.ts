@@ -1,6 +1,6 @@
-import { loadConfig } from "./config";
-import { ExpressAPI } from "./interface/api/express";
-import { Logger } from "./logger";
+import { ExpressAPI } from "./interface/server";
+import { loadConfig } from "./shared/config";
+import { Logger } from "./shared/logger";
 
 void (() => {
   const config = loadConfig();

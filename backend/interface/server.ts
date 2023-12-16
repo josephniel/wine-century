@@ -2,13 +2,12 @@ import bodyParser from 'body-parser';
 import express, { Express } from 'express'
 import * as OpenApiValidator from 'express-openapi-validator';
 
-import { APIConfig } from '../../../config/api';
-import { Logger } from '../../../logger';
-import { API } from '../api';
-import { errorMiddleware } from './middleware/error';
-import { getAdminRoutes } from './admin';
+import { APIConfig } from '../shared/config/api';
+import { Logger } from '../shared/logger';
+import { errorMiddleware } from './controller/middleware/error';
+import adminRouter from './routes/admin';
 
-export class ExpressAPI implements API {
+export class ExpressAPI {
   private express: Express;
   private config: APIConfig;
 
@@ -30,14 +29,14 @@ export const createExpressApp = (logger: Logger): Express => {
   app.use(bodyParser.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(OpenApiValidator.middleware({
-    apiSpec: './interface/api/openapi.yaml',
+    apiSpec: './interface/openapi.yaml',
     validateApiSpec: true,
     validateRequests: true,
     validateResponses: true,
   }));
 
   // Register routes
-  app.use('/admin', getAdminRoutes());
+  app.use('/admin', adminRouter);
 
   app.use(errorMiddleware(logger));
 

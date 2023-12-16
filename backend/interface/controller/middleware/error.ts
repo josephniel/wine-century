@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
-import { Logger } from "../../../../logger";
-import { CustomError } from "../../../../error";
+import { Logger } from "../../../shared/logger"
+import { CustomError } from "../../../shared/errors";
 
 export const errorMiddleware = (logger: Logger) => (err: Error, _: Request, response: Response, next: NextFunction) => {
   if (response.headersSent) {
