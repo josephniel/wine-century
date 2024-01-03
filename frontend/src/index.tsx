@@ -1,15 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
 import './index.css';
-import App from './App';
+import App, { AppProps } from './App';
+import appData from './appData.json';
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+console.log(appData);
+
+const appProps: AppProps = appData;
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App {...appProps} />
   </React.StrictMode>
 );
 
