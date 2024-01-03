@@ -1,0 +1,10 @@
+.errorPage {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+
+  .image404 {
+    width: 400px;
+  }
+}

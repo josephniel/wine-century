@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Header.css';
+import headerLogo from '../assets/wine-century-logo.jpg';
 
 export interface HeaderProps {
   primaryHeader: PrimaryHeaderProps;
@@ -8,6 +9,7 @@ export interface HeaderProps {
 }
 
 interface PrimaryHeaderProps {
+  homeLink: string;
   shopLink: string,
   aboutUsLink: string,
   wishlist: WishlistProps,
@@ -70,7 +72,9 @@ const Wishlist: React.FC<WishlistProps> = (props) =>
 
 const PrimaryHeader: React.FC<PrimaryHeaderProps> = (props) => 
   <section className='primary'>
-    <img className='logo' src='./wine-century-logo.jpg' alt='Wine Century' />
+    <a href={props.homeLink}>
+      <img className='logo' src={headerLogo} alt='Wine Century' />
+    </a>
     <div className='actions'>
       <a href={props.shopLink}>Shop</a>
       <a href={props.aboutUsLink}>About us</a>
