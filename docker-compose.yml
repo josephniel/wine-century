@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      API_PORT: 8000 
+      API_PRIVATE_KEY: ''
+      API_PUBLIC_KEY: ''
+    ports:
+      - 8002:8000
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    environment:
+      ENV: local 
+    ports:
+      - 8001:80
