@@ -1,0 +1,38 @@
+import React from "react";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import Slider from "react-slick";
+
+export interface CarouselImageProps {
+  link: string;
+  name: string;
+}
+
+export interface CarouselProps {
+  images: CarouselImageProps[];
+}
+
+const Carousel: React.FunctionComponent<CarouselProps> = (props) => {
+  const settings = {
+    className: "slider",
+    dots: true,
+    infinite: true,
+    centerMode: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    variableWidth: true,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    cssEase: "linear"
+  };
+
+  return (
+    <Slider {...settings}>
+      {props.images.map(({ link, name }, index: number) => <div key={index}><img src={link} alt={name} /></div>)}
+    </Slider>
+  );
+};
+
+export default Carousel;
