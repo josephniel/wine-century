@@ -2,19 +2,20 @@ import React from "react";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./HeaderBanner.css";
 
 import Slider from "react-slick";
 
-export interface CarouselImageProps {
+export interface HeaderBannerImageProps {
   link: string;
   name: string;
 }
 
-export interface CarouselProps {
-  images: CarouselImageProps[];
+export interface HeaderBannerProps {
+  images: HeaderBannerImageProps[];
 }
 
-const Carousel: React.FunctionComponent<CarouselProps> = (props) => {
+const HeaderBanner: React.FunctionComponent<HeaderBannerProps> = (props) => {
   const settings = {
     className: "slider",
     dots: true,
@@ -35,4 +36,4 @@ const Carousel: React.FunctionComponent<CarouselProps> = (props) => {
   );
 };
 
-export default Carousel;
+export default HeaderBanner;
