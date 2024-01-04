@@ -1,0 +1,8 @@
+.homePage {
+  width: 100vw;
+  flex-grow: 1;
+
+  .slider img {
+    width: 1248px;
+  }
+}
