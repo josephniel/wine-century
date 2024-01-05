@@ -1,4 +1,4 @@
-import App, { type AppProps } from './App';
+import App from './App';
 import appData from './AppData';
 import { loader as HomePageLoader } from './loaders/HomePageLoader';
 import ErrorNotFoundPage from './pages/ErrorNotFoundPage';
@@ -6,7 +6,7 @@ import Homepage from './pages/HomePage';
 import ProductDetails from './pages/ProductDetails';
 
 const customerRoutes = {
-  element: <App {...(appData as AppProps)} />,
+  element: <App {...appData} />,
   children: [
     {
       path: '/',

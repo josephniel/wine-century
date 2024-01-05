@@ -2,15 +2,18 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 
 import './App.scss';
+import Header, { type HeaderProps } from './components/Header';
+import Footer from './components/Footer';
 
 export interface AppProps {
-  name: 'Wine Century Admin Portal';
+  header: HeaderProps;
 }
 
 const App: React.FunctionComponent<AppProps> = (props: AppProps) => (
   <div className="app">
-    {props.name}
+    <Header {...props.header} />
     <Outlet />
+    <Footer />
   </div>
 );
 

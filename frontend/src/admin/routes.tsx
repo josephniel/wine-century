@@ -1,12 +1,13 @@
-import App, { type AppProps } from './App';
+import App from './App';
 import appData from './AppData';
+import Homepage from './pages/HomePage';
 
 const adminRoutes = {
-  element: <App {...(appData as AppProps)} />,
+  element: <App {...appData} />,
   children: [
     {
       path: '/admin',
-      element: <div>ADMIN</div>
+      element: <Homepage />
     },
     {
       path: '/admin/*',

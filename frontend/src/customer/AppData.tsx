@@ -1,4 +1,6 @@
-const data = {
+import { type AppProps } from './App';
+
+const data: AppProps = {
   header: {
     primaryHeader: {
       homeLink: '/',
