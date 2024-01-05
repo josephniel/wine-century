@@ -20,7 +20,12 @@ const Homepage: React.FC = () => {
           <ProductList {...data.bestSellerList} />
 
           <section className="middleBanner">
-            <img src={middleBanner} />
+            <img src={middleBanner} alt="Middle banner" />
+          </section>
+
+          <section className="productListColumns">
+            <ProductList {...data.newArrivalsList} />
+            <ProductList {...data.recommendedList} />
           </section>
 
           <section className="productListColumns">

@@ -25,8 +25,8 @@ const HeaderBanner: React.FunctionComponent<HeaderBannerProps> = (props) => {
     slidesToScroll: 1,
     variableWidth: true,
     autoplay: true,
-    autoplaySpeed: 2000,
-    cssEase: "linear"
+    autoplaySpeed: 5000,
+    cssEase: "ease-in-out"
   };
 
   return (

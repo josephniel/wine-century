@@ -10,7 +10,7 @@ export interface AppProps extends PropsWithChildren {
   footer: FooterProps;
 }
 
-const App: React.FunctionComponent<AppProps> = ({ header, footer, children }) =>
+const App: React.FunctionComponent<AppProps> = ({ header, footer }) =>
   <div className="app">
     <Header {...header} />
       <Outlet />

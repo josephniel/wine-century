@@ -1,4 +1,4 @@
-import { HeaderBannerImageProps, HeaderBannerProps } from '../components/HeaderBanner';
+import { HeaderBannerProps } from '../components/HeaderBanner';
 import { ProductListProps } from '../components/ProductList';
 
 import image1 from '../assets/carousel/image1.png';
