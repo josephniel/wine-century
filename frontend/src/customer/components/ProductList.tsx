@@ -1,7 +1,7 @@
 import React from 'react';
 import ScrollCarousel from 'scroll-carousel-react';
 
-import './ProductList.css';
+import './ProductList.scss';
 
 export interface ProductProps {
   name: string;

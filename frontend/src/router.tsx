@@ -4,7 +4,7 @@ import adminRoutes from "./admin/routes";
 import customerRoutes from "./customer/routes";
 
 export default createBrowserRouter([
-  adminRoutes,
   customerRoutes,
+  adminRoutes,
 ]);
 

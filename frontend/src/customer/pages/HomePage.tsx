@@ -1,7 +1,7 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 
-import "./HomePage.css";
+import "./HomePage.scss";
 import { HomePageData } from "../loaders/HomePageLoader";
 import middleBanner from "../assets/middle-banner.jpg";
 

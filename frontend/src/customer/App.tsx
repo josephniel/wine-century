@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { Outlet } from "react-router-dom";
 
-import './App.css';
+import './App.scss';
 import Header, { HeaderProps } from './components/Header';
 import Footer, { FooterProps } from './components/Footer';
 
