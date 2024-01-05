@@ -1,12 +1,12 @@
-import React from "react";
-import { useLoaderData } from "react-router-dom";
+import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
-import "./HomePage.scss";
-import { HomePageData } from "../loaders/HomePageLoader";
-import middleBanner from "../assets/middle-banner.jpg";
+import './HomePage.scss';
+import { type HomePageData } from '../loaders/HomePageLoader';
+import middleBanner from '../assets/middle-banner.jpg';
 
-import HeaderBanner from "../components/HeaderBanner";
-import ProductList from "../components/ProductList";
+import HeaderBanner from '../components/HeaderBanner';
+import ProductList from '../components/ProductList';
 
 const Homepage: React.FC = () => {
   const data = useLoaderData() as HomePageData;
@@ -36,6 +36,6 @@ const Homepage: React.FC = () => {
       </div>
     </section>
   );
-}
-  
+};
+
 export default Homepage;

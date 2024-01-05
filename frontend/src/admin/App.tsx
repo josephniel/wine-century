@@ -1,14 +1,17 @@
 import React from 'react';
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom';
 
 import './App.scss';
 
-export interface AppProps {}
+export interface AppProps {
+  name: 'Wine Century Admin Portal';
+}
 
-const App: React.FunctionComponent<AppProps> = (props: AppProps) =>
+const App: React.FunctionComponent<AppProps> = (props: AppProps) => (
   <div className="app">
-    Wine Century Admin Portal
+    {props.name}
     <Outlet />
-  </div >;
+  </div>
+);
 
 export default App;

@@ -1,13 +1,11 @@
-import React from "react";
+import React from 'react';
 
-export interface ProductDetailsProps {}
-
-const ProductDetails: React.FC<ProductDetailsProps> = () => {
-  return (
-    <section style={{ height: '1000px' }}>
-      Products
-    </section>
-  );
+export interface ProductDetailsProps {
+  name: string;
 }
+
+const ProductDetails: React.FC<ProductDetailsProps> = (props: ProductDetailsProps) => {
+  return <section style={{ height: '1000px' }}>{props.name}</section>;
+};
 
 export default ProductDetails;

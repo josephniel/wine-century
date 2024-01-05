@@ -1,20 +1,21 @@
-import React, { PropsWithChildren } from 'react';
-import { Outlet } from "react-router-dom";
+import React, { type PropsWithChildren } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import './App.scss';
-import Header, { HeaderProps } from './components/Header';
-import Footer, { FooterProps } from './components/Footer';
+import Header, { type HeaderProps } from './components/Header';
+import Footer, { type FooterProps } from './components/Footer';
 
 export interface AppProps extends PropsWithChildren {
   header: HeaderProps;
   footer: FooterProps;
 }
 
-const App: React.FunctionComponent<AppProps> = ({ header, footer }) =>
+const App: React.FunctionComponent<AppProps> = ({ header, footer }) => (
   <div className="app">
     <Header {...header} />
-      <Outlet />
+    <Outlet />
     <Footer {...footer} />
-  </div >;
+  </div>
+);
 
 export default App;

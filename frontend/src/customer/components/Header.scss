@@ -31,8 +31,10 @@
       gap: 20px;
 
       a {
-        color: #6C0200;
-        font-feature-settings: 'clig' off, 'liga' off;
+        color: #6c0200;
+        font-feature-settings:
+          'clig' off,
+          'liga' off;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -52,15 +54,15 @@
         align-items: center;
 
         border-radius: 8px;
-        border: 1px solid #6C0200;
+        border: 1px solid #6c0200;
 
-        background: #FFF;
+        background: #fff;
 
         input {
           border: none;
           height: 28px;
           padding: 10px;
-          
+
           font-size: 16px;
         }
         input:focus {
@@ -68,25 +70,28 @@
         }
       }
 
-      .wishlist, .cart {
+      .wishlist,
+      .cart {
         display: flex;
         justify-content: flex-end;
         align-items: center;
         gap: 5px;
       }
-      .wishlist:hover, .cart:hover {
+      .wishlist:hover,
+      .cart:hover {
         cursor: pointer;
         text-decoration: none;
 
         svg {
-          filter: invert(0%) sepia(95%) saturate(20%) hue-rotate(300deg) brightness(96%) contrast(105%);
+          filter: invert(0%) sepia(95%) saturate(20%) hue-rotate(300deg) brightness(96%)
+            contrast(105%);
         }
       }
     }
   }
 
   .navigation {
-    background: #6C0200;
+    background: #6c0200;
     display: flex;
     justify-content: center;
     width: 100%;
@@ -100,8 +105,10 @@
       gap: 30px;
 
       a {
-        color: #FFF;
-        font-feature-settings: 'clig' off, 'liga' off;
+        color: #fff;
+        font-feature-settings:
+          'clig' off,
+          'liga' off;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;

@@ -1,5 +1,5 @@
-import { HeaderBannerProps } from '../components/HeaderBanner';
-import { ProductListProps } from '../components/ProductList';
+import { type HeaderBannerProps } from '../components/HeaderBanner';
+import { type ProductListProps } from '../components/ProductList';
 
 import image1 from '../assets/carousel/image1.png';
 import image2 from '../assets/carousel/image2.png';
@@ -18,175 +18,175 @@ export const loader = async (): Promise<HomePageData> => {
   return {
     headerBannerProps: {
       images: [
-        { link: image2, name: "image 2" },
-        { link: image1, name: "image 1" },
-        { link: image2, name: "image 2" },
-        { link: image1, name: "image 1" },
-        { link: image2, name: "image 2" },
-        { link: image1, name: "image 1" },
+        { link: image2, name: 'image 2' },
+        { link: image1, name: 'image 1' },
+        { link: image2, name: 'image 2' },
+        { link: image1, name: 'image 1' },
+        { link: image2, name: 'image 2' },
+        { link: image1, name: 'image 1' }
       ]
     },
     bestSellerList: {
-      title: "Best Sellers",
+      title: 'Best Sellers',
       viewAllLink: '',
       products: [
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/1',
+          price: '10,000 PHP',
+          detailsLink: '/products/1'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/2',
+          price: '30,000 PHP',
+          detailsLink: '/products/2'
         },
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/3',
+          price: '10,000 PHP',
+          detailsLink: '/products/3'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/4',
+          price: '30,000 PHP',
+          detailsLink: '/products/4'
         },
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/5',
+          price: '10,000 PHP',
+          detailsLink: '/products/5'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/6',
+          price: '30,000 PHP',
+          detailsLink: '/products/6'
         },
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/5',
+          price: '10,000 PHP',
+          detailsLink: '/products/5'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/6',
-        },
-      ],
+          price: '30,000 PHP',
+          detailsLink: '/products/6'
+        }
+      ]
     },
     recommendedList: {
-      title: "Recommended Buys",
-      viewAllLink: "",
+      title: 'Recommended Buys',
+      viewAllLink: '',
       products: [
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/1',
+          price: '10,000 PHP',
+          detailsLink: '/products/1'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/2',
+          price: '30,000 PHP',
+          detailsLink: '/products/2'
         },
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/3',
+          price: '10,000 PHP',
+          detailsLink: '/products/3'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/4',
+          price: '30,000 PHP',
+          detailsLink: '/products/4'
         },
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/5',
+          price: '10,000 PHP',
+          detailsLink: '/products/5'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/6',
+          price: '30,000 PHP',
+          detailsLink: '/products/6'
         },
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/5',
+          price: '10,000 PHP',
+          detailsLink: '/products/5'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/6',
-        },
-      ],
+          price: '30,000 PHP',
+          detailsLink: '/products/6'
+        }
+      ]
     },
     newArrivalsList: {
-      title: "New Arrivals",
-      viewAllLink: "",
+      title: 'New Arrivals',
+      viewAllLink: '',
       products: [
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/1',
+          price: '10,000 PHP',
+          detailsLink: '/products/1'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/2',
+          price: '30,000 PHP',
+          detailsLink: '/products/2'
         },
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/3',
+          price: '10,000 PHP',
+          detailsLink: '/products/3'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/4',
+          price: '30,000 PHP',
+          detailsLink: '/products/4'
         },
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/5',
+          price: '10,000 PHP',
+          detailsLink: '/products/5'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/6',
+          price: '30,000 PHP',
+          detailsLink: '/products/6'
         },
         {
-          name: "Montes Purple Angel Carmenere Petit Berdot",
+          name: 'Montes Purple Angel Carmenere Petit Berdot',
           image: product1,
-          price: "10,000 PHP",
-          detailsLink: '/products/5',
+          price: '10,000 PHP',
+          detailsLink: '/products/5'
         },
         {
-          name: "Braes Speyside Single Malt Scotch Whiskey",
+          name: 'Braes Speyside Single Malt Scotch Whiskey',
           image: product2,
-          price: "30,000 PHP",
-          detailsLink: '/products/6',
-        },
-      ],
-    },
+          price: '30,000 PHP',
+          detailsLink: '/products/6'
+        }
+      ]
+    }
   };
-}
+};
