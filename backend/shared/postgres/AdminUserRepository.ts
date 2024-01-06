@@ -13,8 +13,6 @@ export class PostgresAdminUserRepository implements AdminUserRepository {
   }
 
   async getUserUsingEmail(email: string): Promise<AdminUser> {
-    await this.client.connect();
-
     const result = await this.client.query(
       `
 SELECT * FROM admin_users WHERE email = $1;
@@ -26,8 +24,6 @@ SELECT * FROM admin_users WHERE email = $1;
     if (user === undefined) {
       throw new AdminUserNotFoundError(email);
     }
-
-    await this.client.end();
 
     return user as AdminUser;
   }
