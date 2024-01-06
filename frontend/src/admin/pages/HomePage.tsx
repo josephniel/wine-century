@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import './HomePage.scss';
 
 const Homepage: React.FC = () => (
-  <section className="homePage">
+  <section className="adminHomePage">
     <Form className="loginForm bg-body-secondary">
       <div className="loginFormHeader">Login</div>
 

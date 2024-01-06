@@ -7,6 +7,7 @@ import middleBanner from '../assets/middle-banner.jpg';
 
 import HeaderBanner from '../components/HeaderBanner';
 import ProductList from '../components/ProductList';
+import ProductCategories from '../components/ProductCategories';
 
 const Homepage: React.FC = () => {
   const data = useLoaderData() as HomePageData;
@@ -23,15 +24,21 @@ const Homepage: React.FC = () => {
             <img src={middleBanner} alt="Middle banner" />
           </section>
 
-          <section className="productListColumns">
-            <ProductList {...data.newArrivalsList} />
-            <ProductList {...data.recommendedList} />
-          </section>
+          <ProductList {...data.newArrivalsList} />
+        </div>
+      </div>
 
-          <section className="productListColumns">
-            <ProductList {...data.newArrivalsList} />
-            <ProductList {...data.recommendedList} />
-          </section>
+      <div className="productHighlight">
+        <div className="inner">
+          <ProductList {...data.recommendedList} />
+        </div>
+      </div>
+
+      <div className="productSummary">
+        <div className="inner">
+          <ProductCategories {...data.productCategories} />
+
+          <ProductList {...data.allTimeFavorites} />
         </div>
       </div>
     </section>

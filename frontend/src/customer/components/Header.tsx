@@ -82,7 +82,7 @@ const NavigationBar: React.FC<NavigationProps> = (props) => (
 );
 
 const Header: React.FC<HeaderProps> = ({ primaryHeader, navigation }) => (
-  <header className="header">
+  <header className="header shadow">
     <PrimaryHeader {...primaryHeader} />
     <NavigationBar {...navigation} />
   </header>

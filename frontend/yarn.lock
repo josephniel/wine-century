@@ -8677,20 +8677,6 @@ schema-utils@^4.0.0:
     ajv-formats "^2.1.1"
     ajv-keywords "^5.1.0"
 
-scroll-carousel-react@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/scroll-carousel-react/-/scroll-carousel-react-1.0.0.tgz#545fefce3482b1d749e0e22f8953ef4a1e2212d5"
-  integrity sha512-qx3YibxHxeHgtGn/RosDIDg9US1XZVvdPUnDA6DqXhyBRRxd0Dcmz8MbKBJOGcHS9TuHb0OuRGz4VvN6MUDxog==
-  dependencies:
-    react "^18.2.0"
-    react-dom "^18.2.0"
-    scroll-carousel "^1.2.7"
-
-scroll-carousel@^1.2.7:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/scroll-carousel/-/scroll-carousel-1.2.7.tgz#c01aa4f34ff243f0f755dc716bc1916d9bd6aa6a"
-  integrity sha512-tiXdee3QJgyaUXVA5cW4s1qUNdpPG3jGFsoJ1Jc2kDS4X8ipIvwkPwgZSF9SYszCvF9BRxGduJDQunMWBzavdw==
-
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/select-hose/-/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
