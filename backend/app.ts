@@ -1,10 +1,14 @@
-import { ExpressAPI } from "./interface/server";
-import { loadConfig } from "./shared/config";
-import { Logger } from "./shared/logger";
+import { ExpressAPI } from './interface/https/server';
+import { loadConfig } from './shared/config';
+import { Logger } from './shared/logger';
+import { Client } from './shared/postgres/client';
 
-void (() => {
+(() => {
   const config = loadConfig();
   const logger = new Logger();
+  const databaseClient = new Client(config.database);
 
-  (new ExpressAPI(config.api, logger)).run();
+  const api = new ExpressAPI(config.api, logger, databaseClient);
+
+  api.run();
 })();

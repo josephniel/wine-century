@@ -19,25 +19,32 @@ paths:
               $ref: '#/components/schemas/AdminLoginRequest'
       responses:
         '200':
-          description: A JSON array of user names
+          description: Session token for admin
           content:
             application/json:
               schema: 
                 $ref: '#/components/schemas/AdminLoginResponse'
+        '404':
+          description: Admin not found
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/AdminLoginResponse'
+
 
 components:
   schemas:
     AdminLoginRequest:
       type: object
       properties:
-        username:
+        email:
           type: string
-          description: Admin username
+          description: Admin email
         password:
           type: string
           description: Admin password
       required:
-        - username
+        - email
         - password
 
     AdminLoginResponse:
@@ -46,3 +53,11 @@ components:
         token:
           type: string
           description: Bearer Token for API Use
+    
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string

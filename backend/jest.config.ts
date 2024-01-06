@@ -5,6 +5,6 @@ const config: Config.InitialOptions = {
   testEnvironment: 'node',
   verbose: true,
   collectCoverage: true,
-  coverageDirectory: './coverage',
+  coverageDirectory: './coverage'
 };
 export default config;

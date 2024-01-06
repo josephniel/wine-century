@@ -1,8 +1,8 @@
-import { loadConfig } from ".";
+import { loadConfig } from '.';
 
 describe('Config', () => {
   let oldEnv: NodeJS.ProcessEnv = {};
-  
+
   beforeEach(() => {
     oldEnv = process.env;
 
@@ -13,7 +13,7 @@ describe('Config', () => {
 
   afterEach(() => {
     process.env = oldEnv;
-  })
+  });
 
   it('should read from the environment variables', () => {
     const config = loadConfig();
@@ -21,8 +21,8 @@ describe('Config', () => {
       api: {
         port: 9876,
         privateKey: 'mock-private-key',
-        publicKey: 'mock-public-key',
-      },
+        publicKey: 'mock-public-key'
+      }
     });
   });
 });
