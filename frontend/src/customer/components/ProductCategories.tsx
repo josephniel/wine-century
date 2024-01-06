@@ -22,8 +22,7 @@ const Category: React.FC<CategoryProps> = (props: CategoryProps) => (
 const ProductCategories: React.FC<ProductCategoriesProps> = (props: ProductCategoriesProps) => (
   <section className="productCategories">
     <div className="heading">
-      Wine Century&apos;s{` `}
-      <b>PRODUCTS</b>
+      <b>PRODUCT CATEGORIES</b>
     </div>
     <div className="body">
       {props.categories.map((category: CategoryProps, index: number) => (

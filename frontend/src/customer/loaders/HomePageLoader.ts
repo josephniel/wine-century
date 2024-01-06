@@ -2,6 +2,15 @@ import { type HeaderBannerProps } from '../components/HeaderBanner';
 import { type ProductListProps } from '../components/ProductList';
 import { type ProductCategoriesProps } from '../components/ProductCategories';
 
+import whiskyImage from '../assets/categories/whisky.png';
+import scotchImage from '../assets/categories/scotch.png';
+import brandyImage from '../assets/categories/brandy.png';
+import tequilaImage from '../assets/categories/tequila.png';
+import vodkaImage from '../assets/categories/vodka.png';
+import ginImage from '../assets/categories/gin.png';
+import wineImage from '../assets/categories/wine.png';
+import liqueurImage from '../assets/categories/liqueur.png';
+
 import headingImage1 from '../assets/middle-banner.jpg';
 
 import image1 from '../assets/carousel/image1.png';
@@ -35,42 +44,42 @@ export const loader = async (): Promise<HomePageData> => {
       categories: [
         {
           name: 'Whisky',
-          image: product1,
+          image: whiskyImage,
           link: '/products?type=whisky'
         },
         {
           name: 'Scotch',
-          image: product2,
+          image: scotchImage,
           link: '/products?type=scotch'
         },
         {
           name: 'Brandy',
-          image: product1,
+          image: brandyImage,
           link: '/products?type=brandy'
         },
         {
           name: 'Tequila',
-          image: product2,
+          image: tequilaImage,
           link: '/products?type=tequila'
         },
         {
           name: 'Vodka',
-          image: product1,
-          link: '/products?type=vidka'
+          image: vodkaImage,
+          link: '/products?type=vodka'
         },
         {
           name: 'Gin',
-          image: product2,
+          image: ginImage,
           link: '/products?type=gin'
         },
         {
           name: 'Wine',
-          image: product1,
+          image: wineImage,
           link: '/products?type=wine'
         },
         {
           name: 'Liqueurs',
-          image: product2,
+          image: liqueurImage,
           link: '/products?type=liqueurs'
         }
       ]
