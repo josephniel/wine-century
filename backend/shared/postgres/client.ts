@@ -11,7 +11,7 @@ export class Client implements DatabaseClient {
       host: config.host,
       user: config.user,
       password: config.password,
-      database: config.database
+      database: config.name
     });
   }
 

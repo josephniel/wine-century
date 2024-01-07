@@ -7,8 +7,10 @@ describe('Config', () => {
     oldEnv = process.env;
 
     process.env['API_PORT'] = '9876';
-    process.env['API_PRIVATE_KEY'] = 'mock-private-key';
-    process.env['API_PUBLIC_KEY'] = 'mock-public-key';
+    process.env['DATABASE_HOST'] = 'localhost';
+    process.env['DATABASE_USER'] = 'user';
+    process.env['DATABASE_PASSWORD'] = 'password';
+    process.env['DATABASE_NAME'] = 'database';
   });
 
   afterEach(() => {
@@ -19,9 +21,13 @@ describe('Config', () => {
     const config = loadConfig();
     expect(config).toStrictEqual({
       api: {
-        port: 9876,
-        privateKey: 'mock-private-key',
-        publicKey: 'mock-public-key'
+        port: 9876
+      },
+      database: {
+        host: 'localhost',
+        user: 'user',
+        password: 'password',
+        name: 'database'
       }
     });
   });
