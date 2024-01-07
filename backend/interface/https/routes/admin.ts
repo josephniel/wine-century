@@ -14,6 +14,7 @@ const getAdminRoutes = (databaseClient: Client): Router => {
   const controller = new AdminController(loginHandler);
 
   router.post('/login', asyncHandler(controller.adminLoginRequestHandler));
+  router.post('/register', asyncHandler(controller.adminSignupRequestHandler));
 
   return router;
 };

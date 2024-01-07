@@ -1,5 +1,5 @@
 import { CustomError } from '.';
-import { type AdminUser } from '../../domain/admin/entities';
+import { type AdminUser } from '../../interface/database/entities/AdminUser';
 
 class AdminUserNotAuthenticatedError extends CustomError {
   constructor(user: AdminUser) {

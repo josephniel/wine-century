@@ -4,7 +4,9 @@ import { type Request, type Response } from 'express';
 import {
   type LoginRequest,
   type LoginResponse,
-  type AccessHandler
+  type AccessHandler,
+  type SignupResponse,
+  type SignupRequest
 } from '../../../domain/admin/access';
 
 export class AdminController {
@@ -12,8 +14,6 @@ export class AdminController {
 
   constructor(accessHandler: AccessHandler) {
     this.accessHandler = accessHandler;
-
-    this.adminLoginRequestHandler = this.adminLoginRequestHandler.bind(this);
   }
 
   adminLoginRequestHandler = async (request: Request, response: Response): Promise<void> => {
@@ -22,5 +22,13 @@ export class AdminController {
     const responseBody: LoginResponse = await this.accessHandler.login(body);
 
     response.status(HttpStatusCode.Ok).json(responseBody);
+  };
+
+  adminSignupRequestHandler = async (request: Request, response: Response): Promise<void> => {
+    const body = request.body as SignupRequest;
+
+    const responseBody: SignupResponse = await this.accessHandler.signup(body);
+
+    response.status(HttpStatusCode.Created).json(responseBody);
   };
 }

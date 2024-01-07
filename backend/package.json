@@ -13,7 +13,8 @@
     "lint:fix": "eslint --fix --ext .ts,.tsx ",
     "format": "prettier --write './**/*.{ts,tsx,scss,md,json}' --config ./.prettierrc",
     "migrate:create": "yarn db-migrate create -m ./shared/postgres/migrations --sql-file true",
-    "migrate:up": "yarn db-migrate up -m ./shared/postgres/migrations"
+    "migrate:up": "yarn db-migrate up -m ./shared/postgres/migrations",
+    "migrate:down": "yarn db-migrate down -m ./shared/postgres/migrations"
   },
   "dependencies": {
     "argon2": "^0.31.2",
