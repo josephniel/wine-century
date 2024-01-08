@@ -1,8 +1,8 @@
+import AdminUserAlreadyExistsError from '../../domain/errors/AdminUserAlreadyExistsError';
+import AdminUserNotFoundError from '../../domain/errors/AdminUserNotFoundError';
 import { type Database } from '../../interface/database';
 import { type AdminUser } from '../../interface/database/entities/AdminUser';
 import { type AdminUserRepository } from '../../interface/database/repositories/AdminUserRepository';
-import AdminUserAlreadyExistsError from '../../domain/errors/AdminUserAlreadyExistsError';
-import AdminUserNotFoundError from '../../domain/errors/AdminUserNotFoundError';
 
 export class PostgresAdminUserRepository implements AdminUserRepository {
   private readonly database: Database;
