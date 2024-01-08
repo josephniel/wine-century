@@ -2,19 +2,20 @@ import bodyParser from 'body-parser';
 import express, { type Express } from 'express';
 import * as OpenApiValidator from 'express-openapi-validator';
 
-import { type APIConfig } from '../../shared/config/api';
-import { type Logger } from '../../shared/logger';
-import { type Client } from '../../shared/postgres/client';
-import { errorMiddleware } from './controller/middleware/error';
+import { type APIConfig } from '../../config/api';
+import { type Logger } from '../logger';
+import { type Database } from '../../interface/database';
+import { errorMiddleware } from './middleware/error';
 import adminRouter from './routes/admin';
+import { Cache } from '../../interface/cache';
 
 export class ExpressAPI {
   private readonly express: Express;
   private readonly config: APIConfig;
 
-  constructor(config: APIConfig, logger: Logger, databaseClient: Client) {
+  constructor(config: APIConfig, logger: Logger, database: Database, cache: Cache) {
     this.config = config;
-    this.express = createExpressApp(logger, databaseClient);
+    this.express = createExpressApp(logger, database, cache);
 
     this.run = this.run.bind(this);
   }
@@ -24,7 +25,7 @@ export class ExpressAPI {
   }
 }
 
-export const createExpressApp = (logger: Logger, databaseClient: Client): Express => {
+export const createExpressApp = (logger: Logger, database: Database, cache: Cache): Express => {
   const app = express();
 
   app.use(bodyParser.json());
@@ -39,7 +40,7 @@ export const createExpressApp = (logger: Logger, databaseClient: Client): Expres
   );
 
   // Register routes
-  app.use('/admin', adminRouter(databaseClient));
+  app.use('/admin', adminRouter(database, cache));
 
   app.use(errorMiddleware(logger));
 

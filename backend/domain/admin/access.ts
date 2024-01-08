@@ -1,38 +1,17 @@
-import AdminUserNotAuthenticatedError from '../../shared/errors/AdminUserNotAuthenticatedError';
-import hasher from '../../shared/hasher';
-import jwt from '../../shared/jwt';
-import { type AdminUserRepository } from '../../interface/database/AdminUserRepository';
-
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
-
-export interface LoginResponse {
-  token: string;
-}
-
-export interface SignupRequest {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
-
-export interface SignupResponse {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
+import AdminUserNotAuthenticatedError from '../errors/AdminUserNotAuthenticatedError';
+import { Cache } from '../../interface/cache';
+import { AdminUserRepository } from '../../interface/database/repositories/AdminUserRepository';
+import { LoginRequest, LoginResponse, SignupRequest, SignupResponse } from '../../interface/https/admin/access';
+import hasher from '../../library/hasher';
+import jwt from '../../library/jwt';
 
 export class AccessHandler {
   private readonly adminUserRepo: AdminUserRepository;
+  private readonly cache: Cache;
 
-  constructor(adminUserRepo: AdminUserRepository) {
+  constructor(adminUserRepo: AdminUserRepository, cache: Cache) {
     this.adminUserRepo = adminUserRepo;
+    this.cache = cache;
 
     this.login = this.login.bind(this);
     this.signup = this.signup.bind(this);
@@ -45,17 +24,17 @@ export class AccessHandler {
       throw new AdminUserNotAuthenticatedError(user);
     }
 
-    return {
-      token: jwt.sign(
-        {
-          id: 1,
-          firstName: 'Joseph',
-          lastName: 'Tuazon',
-          email: loginRequest.email
-        },
-        user.password
-      )
-    };
+    this.cache.set(user.id.toString(), user.password);
+    const token = jwt.sign(
+      {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+      },
+      user.password
+    );
+    return { token };
   }
 
   async signup(signupRequest: SignupRequest): Promise<SignupResponse> {
@@ -67,7 +46,14 @@ export class AccessHandler {
       hashedPassword
     );
 
-    const response: SignupResponse = { ...user };
+    const response: SignupResponse = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      createdAt: user.createdAt.toUTCString(),
+      updatedAt: user.updatedAt.toUTCString()
+    };
     return response;
   }
 }

@@ -1,20 +1,20 @@
-import { type AdminUserRepository } from '../../interface/database/AdminUserRepository';
+import { type Database } from '../../interface/database';
 import { type AdminUser } from '../../interface/database/entities/AdminUser';
-import AdminUserAlreadyExistsError from '../errors/AdminUserAlreadyExistsError';
-import AdminUserNotFoundError from '../errors/AdminUserNotFoundError';
-import { type Client } from './client';
+import { type AdminUserRepository } from '../../interface/database/repositories/AdminUserRepository';
+import AdminUserAlreadyExistsError from '../../domain/errors/AdminUserAlreadyExistsError';
+import AdminUserNotFoundError from '../../domain/errors/AdminUserNotFoundError';
 
 export class PostgresAdminUserRepository implements AdminUserRepository {
-  private readonly client: Client;
+  private readonly database: Database;
 
-  constructor(client: Client) {
-    this.client = client;
+  constructor(database: Database) {
+    this.database = database;
 
     this.getUserUsingEmail = this.getUserUsingEmail.bind(this);
   }
 
   async getUserUsingEmail(email: string): Promise<AdminUser> {
-    const result = await this.client.query(
+    const result = await this.database.query(
       `
 SELECT * FROM admin_users WHERE email = $1;
 `,
@@ -32,8 +32,8 @@ SELECT * FROM admin_users WHERE email = $1;
       lastName: dbUser.last_name,
       email: dbUser.email,
       password: dbUser.password_hash,
-      createdAt: dbUser.created_at,
-      updatedAt: dbUser.updated_at
+      createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at)),
+      updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at))
     };
 
     return user;
@@ -46,7 +46,7 @@ SELECT * FROM admin_users WHERE email = $1;
     password: string
   ): Promise<AdminUser> {
     try {
-      const result = await this.client.query(
+      const result = await this.database.query(
         `
 INSERT INTO admin_users(first_name, last_name, email, password_hash)
 VALUES ($1, $2, $3, $4)
@@ -62,8 +62,8 @@ RETURNING *;
         lastName: dbUser.last_name,
         email: dbUser.email,
         password: dbUser.password_hash,
-        createdAt: dbUser.created_at,
-        updatedAt: dbUser.updated_at
+        createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at)),
+        updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at))
       };
       return user;
     } catch (err: any) {

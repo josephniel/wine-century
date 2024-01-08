@@ -1,4 +1,4 @@
-import { type AdminUser } from './entities/AdminUser';
+import { type AdminUser } from '../entities/AdminUser';
 
 export interface AdminUserRepository {
   getUserUsingEmail: (email: string) => Promise<AdminUser>;

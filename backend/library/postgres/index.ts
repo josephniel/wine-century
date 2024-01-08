@@ -1,9 +1,9 @@
 import pg from 'pg';
 
-import { type DatabaseConfig } from '../config/database';
-import { type Client as DatabaseClient } from '../../interface/database/Client';
+import { type DatabaseConfig } from '../../config/database';
+import { type Database } from '../../interface/database';
 
-export class Client implements DatabaseClient {
+export class PostgresDatabase implements Database {
   private readonly client: pg.Client;
 
   constructor(config: DatabaseConfig) {

@@ -1,24 +1,27 @@
-import { ExpressAPI } from './interface/https/server';
-import { loadConfig } from './shared/config';
-import { Logger } from './shared/logger';
-import { Client } from './shared/postgres/client';
+import { loadConfig } from './config';
+import { ExpressAPI } from './library/express';
+import { InMemoryCache } from './library/inmemory/cache';
+import { Logger } from './library/logger';
+import { PostgresDatabase } from './library/postgres';
 
 (() => {
   const config = loadConfig();
   const logger = new Logger();
-  const databaseClient = new Client(config.database);
-  Promise.resolve(databaseClient.connect()).catch(() => {
+
+  const cache = new InMemoryCache(config.cache);
+  const database = new PostgresDatabase(config.database);
+  Promise.resolve(database.connect()).catch(() => {
     process.emit('SIGINT');
   });
 
-  const api = new ExpressAPI(config.api, logger, databaseClient);
+  const api = new ExpressAPI(config.api, logger, database, cache);
 
   api.run();
 
   process.on('SIGINT', (): void => {
     console.log('\nGracefully shutting down from SIGINT (Ctrl-C)');
 
-    Promise.resolve(databaseClient.end()).catch(() => {});
+    Promise.resolve(database.end()).catch(() => {});
 
     process.exit();
   });

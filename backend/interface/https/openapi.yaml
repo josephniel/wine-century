@@ -58,6 +58,12 @@ paths:
             application/json:
               schema: 
                 $ref: '#/components/schemas/AdminSignupResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ErrorResponse'
         '409':
           description: Admin already exists
           content:
@@ -118,7 +124,7 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: integer
           description: Admin id
         firstName:
           type: string
