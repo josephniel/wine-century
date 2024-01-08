@@ -31,7 +31,7 @@ SELECT * FROM admin_users WHERE email = $1;
       firstName: dbUser.first_name,
       lastName: dbUser.last_name,
       email: dbUser.email,
-      password: dbUser.password_hash,
+      hashedPassword: dbUser.password_hash,
       createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at)),
       updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at))
     };
@@ -61,7 +61,7 @@ RETURNING *;
         firstName: dbUser.first_name,
         lastName: dbUser.last_name,
         email: dbUser.email,
-        password: dbUser.password_hash,
+        hashedPassword: dbUser.password_hash,
         createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at)),
         updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at))
       };

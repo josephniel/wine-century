@@ -20,11 +20,11 @@ export class AccessHandler {
   async login(loginRequest: LoginRequest): Promise<LoginResponse> {
     const user = await this.adminUserRepo.getUserUsingEmail(loginRequest.email);
 
-    if (!(await hasher.verify(user.password, loginRequest.password))) {
+    if (!(await hasher.verify(user.hashedPassword, loginRequest.password))) {
       throw new AdminUserNotAuthenticatedError(user);
     }
 
-    this.cache.set(user.id.toString(), user.password);
+    this.cache.set(user.id.toString(), user.hashedPassword);
     const token = jwt.sign(
       {
         id: user.id,
@@ -32,7 +32,7 @@ export class AccessHandler {
         lastName: user.lastName,
         email: user.email
       },
-      user.password
+      user.hashedPassword
     );
     return { token };
   }
