@@ -24,7 +24,6 @@ export const authMiddleware =
     }
 
     const decodedUser = jwt.decode(token);
-    console.log(decodedUser);
     const cachedValue = cache.get(decodedUser.id.toString());
 
     const isValid = jwt.verify(token, cachedValue);
