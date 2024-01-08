@@ -29,7 +29,7 @@ export class InMemoryCache implements Cache {
   set(key: string, value: string): void {
     const retVal = this.map.get(key);
     if (retVal !== undefined) {
-      throw new Error(`Cache key ${key} already exists.`);
+      return;
     }
 
     const cacheObject: InMemoryObject = {

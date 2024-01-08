@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
-import express, { type Express } from 'express';
+import cors from 'cors';
+import express, { type Express, type Request } from 'express';
 import * as OpenApiValidator from 'express-openapi-validator';
 
 import { type APIConfig } from '../../config/api';
@@ -15,7 +16,7 @@ export class ExpressAPI {
 
   constructor(config: APIConfig, logger: Logger, database: Database, cache: Cache) {
     this.config = config;
-    this.express = createExpressApp(logger, database, cache);
+    this.express = createExpressApp(config, logger, database, cache);
 
     this.run = this.run.bind(this);
   }
@@ -25,9 +26,25 @@ export class ExpressAPI {
   }
 }
 
-const createExpressApp = (logger: Logger, database: Database, cache: Cache): Express => {
+const createExpressApp = (
+  config: APIConfig,
+  logger: Logger,
+  database: Database,
+  cache: Cache
+): Express => {
   const app = express();
 
+  const corsOptionsDelegate = function (req: Request, callback: any): void {
+    let corsOptions;
+    if (config.corsAllowList.includes(req.header('Origin') ?? '')) {
+      corsOptions = { origin: true };
+    } else {
+      corsOptions = { origin: false };
+    }
+    callback(null, corsOptions);
+  };
+
+  app.use(cors(corsOptionsDelegate));
   app.use(bodyParser.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(
