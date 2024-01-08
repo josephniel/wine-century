@@ -4,6 +4,6 @@ export interface CacheConfig {
 
 export const loadCacheConfig = (): CacheConfig => {
   return {
-    expiryMs: Number(process.env['CACHE_EXPIRY_MS'] ?? 24 * 60 * 60 * 1000),
+    expiryMs: Number(process.env['CACHE_EXPIRY_MS'] ?? 24 * 60 * 60 * 1000)
   };
 };

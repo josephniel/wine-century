@@ -5,8 +5,8 @@ import { asyncHandler } from '../middleware/asyncHandler';
 import { authMiddleware } from '../middleware/auth';
 import { AccessHandler } from '../../../domain/admin/access';
 import { PostgresAdminUserRepository } from '../../postgres/AdminUserRepository';
-import { Database } from '../../../interface/database';
-import { Cache } from '../../../interface/cache';
+import { type Database } from '../../../interface/database';
+import { type Cache } from '../../../interface/cache';
 
 const getAdminRoutes = (database: Database, cache: Cache): Router => {
   const router = Router();
@@ -16,7 +16,11 @@ const getAdminRoutes = (database: Database, cache: Cache): Router => {
   const controller = new AdminController(loginHandler);
 
   router.post('/login', asyncHandler(controller.adminLoginRequestHandler));
-  router.post('/register', authMiddleware(cache), asyncHandler(controller.adminSignupRequestHandler));
+  router.post(
+    '/register',
+    authMiddleware(cache),
+    asyncHandler(controller.adminSignupRequestHandler)
+  );
 
   return router;
 };

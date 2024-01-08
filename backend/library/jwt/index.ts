@@ -33,13 +33,13 @@ export const verify = (token: string, passwordHash: string): boolean => {
   } catch (err) {
     return false;
   }
-};     
+};
 
 export const decode = (token: string): JWTUser => {
   const jwtObject: any = jwt.decode(token);
   const user: JWTUser = jwtObject.data;
   return user;
-}
+};
 
 export default {
   decode,

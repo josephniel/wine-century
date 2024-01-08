@@ -7,7 +7,7 @@ import { type Logger } from '../logger';
 import { type Database } from '../../interface/database';
 import { errorMiddleware } from './middleware/error';
 import adminRouter from './routes/admin';
-import { Cache } from '../../interface/cache';
+import { type Cache } from '../../interface/cache';
 
 export class ExpressAPI {
   private readonly express: Express;
@@ -25,7 +25,7 @@ export class ExpressAPI {
   }
 }
 
-export const createExpressApp = (logger: Logger, database: Database, cache: Cache): Express => {
+const createExpressApp = (logger: Logger, database: Database, cache: Cache): Express => {
   const app = express();
 
   app.use(bodyParser.json());

@@ -1,7 +1,12 @@
 import AdminUserNotAuthenticatedError from '../errors/AdminUserNotAuthenticatedError';
-import { Cache } from '../../interface/cache';
-import { AdminUserRepository } from '../../interface/database/repositories/AdminUserRepository';
-import { LoginRequest, LoginResponse, SignupRequest, SignupResponse } from '../../interface/https/admin/access';
+import { type Cache } from '../../interface/cache';
+import { type AdminUserRepository } from '../../interface/database/repositories/AdminUserRepository';
+import {
+  type LoginRequest,
+  type LoginResponse,
+  type SignupRequest,
+  type SignupResponse
+} from '../../interface/https/admin/access';
 import hasher from '../../library/hasher';
 import jwt from '../../library/jwt';
 

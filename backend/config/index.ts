@@ -11,5 +11,5 @@ export interface Config {
 export const loadConfig = (): Config => ({
   api: loadAPIConfig(),
   database: loadDatabaseConfig(),
-  cache: loadCacheConfig(),
+  cache: loadCacheConfig()
 });

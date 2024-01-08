@@ -1,5 +1,5 @@
-import { CacheConfig } from "../../config/cache";
-import { Cache } from "../../interface/cache";
+import { type CacheConfig } from '../../config/cache';
+import { type Cache } from '../../interface/cache';
 
 interface InMemoryObject {
   value: string;
@@ -8,8 +8,8 @@ interface InMemoryObject {
 
 export class InMemoryCache implements Cache {
   private map: Map<string, InMemoryObject>;
-  private config: CacheConfig;
-  
+  private readonly config: CacheConfig;
+
   constructor(config: CacheConfig) {
     this.map = new Map();
     this.config = config;
@@ -17,10 +17,10 @@ export class InMemoryCache implements Cache {
 
   get(key: string): string {
     const retVal = this.map.get(key);
-    if(retVal === undefined) {
+    if (retVal === undefined) {
       throw new Error(`Cache key ${key} is not found.`);
     }
-    if(retVal.expiry < Date.now()) {
+    if (retVal.expiry < Date.now()) {
       throw new Error(`Cache ${key} is expired.`);
     }
     return retVal.value;
@@ -28,13 +28,13 @@ export class InMemoryCache implements Cache {
 
   set(key: string, value: string): void {
     const retVal = this.map.get(key);
-    if(retVal !== undefined) {
+    if (retVal !== undefined) {
       throw new Error(`Cache key ${key} already exists.`);
     }
 
     const cacheObject: InMemoryObject = {
       value,
-      expiry: Date.now() + this.config.expiryMs,
+      expiry: Date.now() + this.config.expiryMs
     };
     this.map = this.map.set(key, cacheObject);
   }

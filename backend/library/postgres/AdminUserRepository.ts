@@ -32,8 +32,8 @@ SELECT * FROM admin_users WHERE email = $1;
       lastName: dbUser.last_name,
       email: dbUser.email,
       hashedPassword: dbUser.password_hash,
-      createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at)),
-      updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at))
+      createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at as string)),
+      updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at as string))
     };
 
     return user;
@@ -62,8 +62,8 @@ RETURNING *;
         lastName: dbUser.last_name,
         email: dbUser.email,
         hashedPassword: dbUser.password_hash,
-        createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at)),
-        updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at))
+        createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at as string)),
+        updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at as string))
       };
       return user;
     } catch (err: any) {
