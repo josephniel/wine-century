@@ -1,7 +1,7 @@
 import { type NextFunction, type Request, type Response } from 'express';
 
-import { type Logger } from '../../logger';
 import { CustomError } from '../../../domain/errors';
+import { type Logger } from '../../logger';
 
 export const errorMiddleware =
   (logger: Logger) => (err: Error, _: Request, response: Response, next: NextFunction) => {

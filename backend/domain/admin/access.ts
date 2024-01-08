@@ -1,4 +1,3 @@
-import AdminUserNotAuthenticatedError from '../errors/AdminUserNotAuthenticatedError';
 import { type Cache } from '../../interface/cache';
 import { type AdminUserRepository } from '../../interface/database/repositories/AdminUserRepository';
 import {
@@ -9,6 +8,7 @@ import {
 } from '../../interface/https/admin/access';
 import hasher from '../../library/hasher';
 import jwt from '../../library/jwt';
+import AdminUserNotAuthenticatedError from '../errors/AdminUserNotAuthenticatedError';
 
 export class AccessHandler {
   private readonly adminUserRepo: AdminUserRepository;

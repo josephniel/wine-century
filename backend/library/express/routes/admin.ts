@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
+import { AccessHandler } from '../../../domain/admin/access';
+import { type Cache } from '../../../interface/cache';
+import { type Database } from '../../../interface/database';
+import { PostgresAdminUserRepository } from '../../postgres/AdminUserRepository';
 import { AdminController } from '../controller/admin';
 import { asyncHandler } from '../middleware/asyncHandler';
 import { authMiddleware } from '../middleware/auth';
-import { AccessHandler } from '../../../domain/admin/access';
-import { PostgresAdminUserRepository } from '../../postgres/AdminUserRepository';
-import { type Database } from '../../../interface/database';
-import { type Cache } from '../../../interface/cache';
 
 const getAdminRoutes = (database: Database, cache: Cache): Router => {
   const router = Router();

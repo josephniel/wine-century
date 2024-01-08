@@ -3,11 +3,11 @@ import express, { type Express } from 'express';
 import * as OpenApiValidator from 'express-openapi-validator';
 
 import { type APIConfig } from '../../config/api';
-import { type Logger } from '../logger';
+import { type Cache } from '../../interface/cache';
 import { type Database } from '../../interface/database';
+import { type Logger } from '../logger';
 import { errorMiddleware } from './middleware/error';
 import adminRouter from './routes/admin';
-import { type Cache } from '../../interface/cache';
 
 export class ExpressAPI {
   private readonly express: Express;

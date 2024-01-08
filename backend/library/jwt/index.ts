@@ -1,5 +1,5 @@
-import * as jwt from 'jsonwebtoken';
 import crypto from 'crypto';
+import * as jwt from 'jsonwebtoken';
 
 export interface JWTUser {
   id: number;

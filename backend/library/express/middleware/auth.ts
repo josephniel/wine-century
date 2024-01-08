@@ -1,9 +1,9 @@
-import { type Request, type Response, type NextFunction } from 'express';
+import { type NextFunction, type Request, type Response } from 'express';
 
-import jwt from '../../jwt';
-import AuthorizationRequiredError from '../../../domain/errors/AuthorizationRequiredError';
 import AuthorizationInvalidError from '../../../domain/errors/AuthorizationInvalidError';
+import AuthorizationRequiredError from '../../../domain/errors/AuthorizationRequiredError';
 import { type Cache } from '../../../interface/cache';
+import jwt from '../../jwt';
 
 export const authMiddleware =
   (cache: Cache) =>

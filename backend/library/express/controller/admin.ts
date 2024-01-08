@@ -1,12 +1,13 @@
 import { HttpStatusCode } from 'axios';
 import { type Request, type Response } from 'express';
+
+import { type AccessHandler } from '../../../domain/admin/access';
 import {
   type LoginRequest,
   type LoginResponse,
   type SignupRequest,
   type SignupResponse
 } from '../../../interface/https/admin/access';
-import { type AccessHandler } from '../../../domain/admin/access';
 
 export class AdminController {
   private readonly accessHandler: AccessHandler;
