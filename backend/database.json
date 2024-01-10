@@ -1,0 +1,12 @@
+{
+  "defaultEnv": "local",
+  "local": {
+    "driver": "pg",
+    "user": "user",
+    "password": "password",
+    "host": "localhost",
+    "database": "winecentury",
+    "port": "5432",
+    "schema": "public"
+  }
+}

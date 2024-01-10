@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      API_PORT: 8000 
+      API_PRIVATE_KEY: ''
+      API_PUBLIC_KEY: ''
+    ports:
+      - 8002:8000
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    environment:
+      ENV: local 
+    ports:
+      - 8001:80
+
+  db:
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: winecentury
+    ports:
+      - 5432:5432
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+
+volumes:
+  db_volume:
+    name: db_volume

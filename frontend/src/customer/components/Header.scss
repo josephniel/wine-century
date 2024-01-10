@@ -1,0 +1,123 @@
+.header {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+
+  .primary {
+    display: flex;
+    width: 1248px;
+    height: 90px;
+    padding: 20px 30px;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .logo {
+      height: 50px;
+    }
+    .logo:hover {
+      cursor: pointer;
+    }
+
+    .actions {
+      display: flex;
+      height: 50px;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 20px;
+
+      a {
+        color: #6c0200;
+        font-feature-settings:
+          'clig' off,
+          'liga' off;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%; /* 20.8px */
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      .searchbar {
+        display: flex;
+        width: 402px;
+        height: 50px;
+        padding: 0px 10px;
+        justify-content: space-between;
+        align-items: center;
+
+        border-radius: 8px;
+        border: 1px solid #6c0200;
+
+        background: #fff;
+
+        input {
+          border: none;
+          height: 28px;
+          padding: 10px;
+
+          font-size: 16px;
+        }
+        input:focus {
+          outline: none;
+        }
+      }
+
+      .wishlist,
+      .cart {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 5px;
+      }
+      .wishlist:hover,
+      .cart:hover {
+        cursor: pointer;
+        text-decoration: none;
+
+        svg {
+          filter: invert(0%) sepia(95%) saturate(20%) hue-rotate(300deg) brightness(96%)
+            contrast(105%);
+        }
+      }
+    }
+  }
+
+  .navigation {
+    background: #6c0200;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .inner {
+      display: flex;
+      width: 1248px;
+      height: 50px;
+      padding: 14px 30px;
+      align-items: flex-start;
+      gap: 30px;
+
+      a {
+        color: #fff;
+        font-feature-settings:
+          'clig' off,
+          'liga' off;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%; /* 20.8px */
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

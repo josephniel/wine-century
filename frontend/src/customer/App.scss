@@ -1,0 +1,9 @@
+@import '~bootstrap/scss/bootstrap';
+
+.app {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}

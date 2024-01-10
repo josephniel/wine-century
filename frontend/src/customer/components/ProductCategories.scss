@@ -1,0 +1,42 @@
+.productCategories {
+  .heading {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    padding: 15px 15px 0;
+    width: 100%;
+  }
+
+  .body {
+    width: 1200px;
+    margin: 10px 24px 0 !important;
+    display: flex;
+    flex-direction: row;
+
+    a {
+      color: #000 !important;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .category {
+      width: 150px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      align-items: center;
+
+      img {
+        width: 130px;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+        object-position: bottom;
+      }
+    }
+  }
+}

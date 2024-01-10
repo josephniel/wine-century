@@ -1,0 +1,156 @@
+openapi: 3.0.0
+info:
+  title: Wine Century Backend Code
+  description: backend code for the wine century website
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local development server
+
+paths:
+  /admin/login:
+    post:
+      summary: Login as an admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminLoginRequest'
+      responses:
+        '200':
+          description: Session token for admin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminLoginResponse'
+        '401':
+          description: Admin not authenticated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Admin not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /admin/register:
+    post:
+      summary: Register an admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminSignupRequest'
+      responses:
+        '201':
+          description: Session token for admin
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminSignupResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Admin already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    AdminLoginRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Admin email
+        password:
+          type: string
+          description: Admin password
+      required:
+        - email
+        - password
+
+    AdminLoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: Bearer Token for API Use
+
+    AdminSignupRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Admin first name
+        lastName:
+          type: string
+          description: Admin last name
+        email:
+          type: string
+          description: Admin email
+        password:
+          type: string
+          description: Admin password
+      required:
+        - firstName
+        - lastName
+        - email
+        - password
+
+    AdminSignupResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Admin id
+        firstName:
+          type: string
+          description: Admin first name
+        lastName:
+          type: string
+          description: Admin last name
+        email:
+          type: string
+          description: Admin email
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - createdAt
+        - updatedAt
+
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: string
+        errorMessage:
+          type: string
