@@ -1,9 +1,10 @@
+import './App.scss';
+
 import React, { type PropsWithChildren } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import './App.scss';
-import Header, { type HeaderProps } from './components/Header';
 import Footer, { type FooterProps } from './components/Footer';
+import Header, { type HeaderProps } from './components/Header';
 
 export interface AppProps extends PropsWithChildren {
   header: HeaderProps;

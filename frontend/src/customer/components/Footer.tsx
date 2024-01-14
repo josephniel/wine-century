@@ -1,14 +1,14 @@
-import React from 'react';
-
 import './Footer.scss';
+
+import React from 'react';
 
 import addressLogo from '../assets/footer/address.svg';
 import emailLogo from '../assets/footer/email.svg';
-import phoneLogo from '../assets/footer/phone.svg';
 import facebookLogo from '../assets/footer/facebook.svg';
 import instagramLogo from '../assets/footer/instagram.svg';
-import whatsappLogo from '../assets/footer/whatsapp.svg';
+import phoneLogo from '../assets/footer/phone.svg';
 import wechatIcon from '../assets/footer/wechat.svg';
+import whatsappLogo from '../assets/footer/whatsapp.svg';
 
 export interface FooterProps {
   contactUs: ContactUsProps;

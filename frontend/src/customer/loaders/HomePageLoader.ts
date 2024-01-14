@@ -1,23 +1,19 @@
-import { type HeaderBannerProps } from '../components/HeaderBanner';
-import { type ProductListProps } from '../components/ProductList';
-import { type ProductCategoriesProps } from '../components/ProductCategories';
-
-import whiskyImage from '../assets/categories/whisky.png';
-import scotchImage from '../assets/categories/scotch.png';
-import brandyImage from '../assets/categories/brandy.png';
-import tequilaImage from '../assets/categories/tequila.png';
-import vodkaImage from '../assets/categories/vodka.png';
-import ginImage from '../assets/categories/gin.png';
-import wineImage from '../assets/categories/wine.png';
-import liqueurImage from '../assets/categories/liqueur.png';
-
-import headingImage1 from '../assets/middle-banner.jpg';
-
 import image1 from '../assets/carousel/image1.png';
 import image2 from '../assets/carousel/image2.png';
-
+import brandyImage from '../assets/categories/brandy.png';
+import ginImage from '../assets/categories/gin.png';
+import liqueurImage from '../assets/categories/liqueur.png';
+import scotchImage from '../assets/categories/scotch.png';
+import tequilaImage from '../assets/categories/tequila.png';
+import vodkaImage from '../assets/categories/vodka.png';
+import whiskyImage from '../assets/categories/whisky.png';
+import wineImage from '../assets/categories/wine.png';
+import headingImage1 from '../assets/middle-banner.jpg';
 import product1 from '../assets/products/product1.png';
 import product2 from '../assets/products/product2.png';
+import { type HeaderBannerProps } from '../components/HeaderBanner';
+import { type ProductCategoriesProps } from '../components/ProductCategories';
+import { type ProductListProps } from '../components/ProductList';
 
 export interface HomePageData {
   headerBannerProps: HeaderBannerProps;

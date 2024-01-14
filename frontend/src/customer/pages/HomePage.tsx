@@ -1,13 +1,13 @@
+import './HomePage.scss';
+
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 
-import './HomePage.scss';
-import { type HomePageData } from '../loaders/HomePageLoader';
 import middleBanner from '../assets/middle-banner.jpg';
-
 import HeaderBanner from '../components/HeaderBanner';
-import ProductList from '../components/ProductList';
 import ProductCategories from '../components/ProductCategories';
+import ProductList from '../components/ProductList';
+import { type HomePageData } from '../loaders/HomePageLoader';
 
 const Homepage: React.FC = () => {
   const data = useLoaderData() as HomePageData;

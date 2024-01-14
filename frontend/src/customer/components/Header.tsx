@@ -1,10 +1,11 @@
+import './Header.scss';
+
 import React from 'react';
 
-import './Header.scss';
-import headerLogo from '../assets/wine-century-logo.jpg';
-import searchLogo from '../assets/header/search.svg';
 import cartLogo from '../assets/header/cart.svg';
+import searchLogo from '../assets/header/search.svg';
 import wishlistLogo from '../assets/header/wishlist.svg';
+import headerLogo from '../assets/wine-century-logo.jpg';
 
 export interface HeaderProps {
   primaryHeader: PrimaryHeaderProps;

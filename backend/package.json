@@ -12,9 +12,9 @@
     "lint": "eslint --ext .ts,.tsx .",
     "lint:fix": "eslint --ext .ts,.tsx . --fix",
     "format": "prettier --write './**/*.{ts,tsx,scss,md,json,yml,yaml}' --config ./.prettierrc",
-    "migrate:create": "yarn db-migrate create -m ./shared/postgres/migrations --sql-file true",
-    "migrate:up": "yarn db-migrate up -m ./shared/postgres/migrations",
-    "migrate:down": "yarn db-migrate down -m ./shared/postgres/migrations"
+    "migrate:create": "yarn db-migrate create -m ./library/postgres/migrations --sql-file true",
+    "migrate:up": "yarn db-migrate up -m ./library/postgres/migrations",
+    "migrate:down": "yarn db-migrate down -m ./library/postgres/migrations"
   },
   "dependencies": {
     "argon2": "^0.31.2",
