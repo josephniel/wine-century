@@ -1,6 +1,7 @@
+import './ErrorNotFoundPage.scss';
+
 import React from 'react';
 
-import './ErrorNotFoundPage.scss';
 import image404 from '../assets/404-not-found.png';
 
 const ErrorNotFoundPage: React.FC = () => (

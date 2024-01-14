@@ -1,6 +1,4 @@
-@import '~bootstrap/scss/bootstrap';
-
-.adminHomePage {
+.loginPage {
   width: 100vw;
   flex-grow: 1;
   display: flex;
@@ -13,8 +11,8 @@
     overflow: hidden;
 
     .loginFormHeader {
-      background-color: $gray-600;
-      color: $gray-100;
+      background-color: #6c757d;
+      color: #f8f9fa;
       padding: 15px 30px;
       width: 100%;
     }

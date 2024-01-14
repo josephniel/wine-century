@@ -1,13 +1,13 @@
+import './LoginPage.scss';
+
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Form as RouterForm } from 'react-router-dom';
 
-import './HomePage.scss';
-
-const Homepage: React.FC = () => {
+const LoginPage: React.FC = () => {
   return (
-    <section className="adminHomePage">
+    <section className="loginPage">
       <RouterForm method="post" className="loginForm bg-body-secondary">
         <div className="loginFormHeader">Login</div>
 
@@ -30,4 +30,4 @@ const Homepage: React.FC = () => {
   );
 };
 
-export default Homepage;
+export default LoginPage;

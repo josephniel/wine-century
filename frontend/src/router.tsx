@@ -1,6 +1,20 @@
-import { createBrowserRouter } from 'react-router-dom';
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import adminRoutes from './admin/routes';
-import customerRoutes from './customer/routes';
+import AuthProvider, { useAuth } from './admin/providers/AuthProvider';
+import getAdminRoutes from './admin/routes';
+import getCustomerRoutes from './customer/routes';
 
-export default createBrowserRouter([customerRoutes, adminRoutes]);
+const AuthenticatedRouter = (): React.ReactElement => {
+  const { token, setToken } = useAuth();
+  const router = createBrowserRouter([getCustomerRoutes(), getAdminRoutes(token, setToken)]);
+  return <RouterProvider router={router} />;
+};
+
+const Router = (): React.ReactElement => (
+  <AuthProvider>
+    <AuthenticatedRouter />
+  </AuthProvider>
+);
+
+export default Router;

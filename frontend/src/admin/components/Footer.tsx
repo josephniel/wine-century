@@ -1,8 +1,8 @@
+import './Footer.scss';
+
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-
-import './Footer.scss';
 
 const Footer: React.FC = () => {
   return (

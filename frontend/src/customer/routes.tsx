@@ -1,3 +1,5 @@
+import { type RouteObject } from 'react-router-dom';
+
 import App from './App';
 import appData from './AppData';
 import { loader as HomePageLoader } from './loaders/HomePageLoader';
@@ -28,4 +30,8 @@ const customerRoutes = {
   ]
 };
 
-export default customerRoutes;
+const getCustomerRoutes = (): RouteObject => {
+  return customerRoutes;
+};
+
+export default getCustomerRoutes;
