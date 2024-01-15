@@ -1,12 +1,4 @@
-import axios from 'axios';
-import {
-  createContext,
-  type PropsWithChildren,
-  useContext,
-  useEffect,
-  // useMemo,
-  useState
-} from 'react';
+import { createContext, type PropsWithChildren, useContext, useEffect, useState } from 'react';
 
 interface Context {
   token: string | null;
@@ -25,10 +17,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     if (token !== null) {
-      axios.defaults.headers.common.Authorization = 'Bearer ' + token;
       localStorage.setItem('token', token);
     } else {
-      delete axios.defaults.headers.common.Authorization;
       localStorage.removeItem('token');
     }
   }, [token]);

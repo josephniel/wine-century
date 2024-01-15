@@ -9,7 +9,6 @@ const loginUser = async (email: string, password: string): Promise<AxiosResponse
       password
     },
     {
-      withCredentials: false,
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
@@ -38,7 +37,6 @@ const LoginAction =
     setToken(token);
 
     return null;
-    // return redirect('/admin/dashboard');
   };
 
 export default LoginAction;
