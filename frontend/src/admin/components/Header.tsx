@@ -9,10 +9,12 @@ import type User from '../data/user';
 
 export interface HeaderProps {
   user?: User | undefined;
-  logoutURL: string;
 }
 
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
+  const profileLink = `/admin/profile/${props.user?.id}`;
+  const logoutURL = '/admin/logout';
+
   return (
     <Navbar expand="lg" className="header bg-body-secondary">
       <Container>
@@ -27,10 +29,10 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
-                Signed in as: <a href={props.user.profileLink}>{props.user.name}</a>
+                Signed in as: <a href={profileLink}>{props.user.firstName}</a>
               </Navbar.Text>
               <Navbar.Text>
-                <a href={props.logoutURL}>Logout</a>
+                <a href={logoutURL}>Logout</a>
               </Navbar.Text>
             </Navbar.Collapse>
           </>
