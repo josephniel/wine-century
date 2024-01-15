@@ -77,6 +77,103 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
+  /admin/users:
+    get:
+      summary: List users
+      parameters:
+        - in: query
+          name: limit
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Limit of users to get
+        - in: query
+          name: offset
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+          description: Offset of users to get
+      responses:
+        '200':
+          description: Users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserListResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /admin/users/{userID}:
+    put:
+      summary: Update user
+      parameters:
+        - in: path
+          name: userID
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditUserRequest'
+      responses:
+        '200':
+          description: Edited successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditUserResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Delete user
+      parameters:
+        - in: path
+          name: userID
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the user to delete
+      responses:
+        '204':
+          description: Deleted successfully
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
 components:
   schemas:
     AdminLoginRequest:
@@ -146,6 +243,61 @@ components:
         - email
         - createdAt
         - updatedAt
+
+    EditUserRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: Admin first name
+        lastName:
+          type: string
+          description: Admin last name
+        email:
+          type: string
+          description: Admin email
+      required:
+        - firstName
+        - lastName
+        - email
+
+    EditUserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Admin id
+        firstName:
+          type: string
+          description: Admin first name
+        lastName:
+          type: string
+          description: Admin last name
+        email:
+          type: string
+          description: Admin email
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - firstName
+        - lastName
+        - email
+        - createdAt
+        - updatedAt
+
+    UserListResponse:
+      type: object
+      properties:
+        users:
+          type: array
+        hasMore:
+          type: boolean
+      required:
+        - users
+        - hasMore
 
     ErrorResponse:
       type: object

@@ -31,5 +31,7 @@ export const authMiddleware =
       throw new AuthorizationInvalidError();
     }
 
+    request.headers['x-user-id'] = decodedUser.id.toString();
+
     next();
   };
