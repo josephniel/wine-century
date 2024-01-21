@@ -1,4 +1,7 @@
+import { jwtDecode } from 'jwt-decode';
 import { createContext, type PropsWithChildren, useContext, useEffect, useState } from 'react';
+
+import type User from '../data/user';
 
 interface Context {
   token: string | null;
@@ -28,6 +31,26 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 export const useAuth = (): Context => {
   return useContext(AuthContext);
+};
+
+export const getUserFromAuth = (): User | undefined => {
+  const { token } = useAuth();
+
+  const getUserFromToken = (token: string | null): User | undefined => {
+    if (token === null) {
+      return undefined;
+    }
+
+    const decoded: any = jwtDecode(token);
+    return {
+      id: decoded.data.id,
+      firstName: decoded.data.firstName,
+      lastName: decoded.data.lastName,
+      email: decoded.data.email
+    };
+  };
+
+  return getUserFromToken(token);
 };
 
 export default AuthProvider;
