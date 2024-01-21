@@ -3,7 +3,9 @@ import './UserRegisterPage.scss';
 import { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import PasswordChecklist from 'react-password-checklist';
-import { Form as RouterForm } from 'react-router-dom';
+import { Form as RouterForm, Navigate } from 'react-router-dom';
+
+import { registerUser } from '../../api/users';
 
 const UserRegisterPage = (): React.ReactElement => {
   const [firstName, setFirstName] = useState('');
@@ -13,22 +15,36 @@ const UserRegisterPage = (): React.ReactElement => {
   const [passwordAgain, setPasswordAgain] = useState('');
 
   const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [redirect, setRedirect] = useState(false);
 
   const handleSubmit = (event: any): void => {
+    event.preventDefault();
+    event.stopPropagation();
+
     const form = document.getElementById('registerUserForm') as HTMLFormElement;
     if (!form.checkValidity()) {
-      event.preventDefault();
-      event.stopPropagation();
       return;
     }
 
     if (!isPasswordValid) {
-      event.preventDefault();
-      event.stopPropagation();
+      return;
     }
+
+    registerUser({
+      firstName,
+      lastName,
+      email,
+      password
+    })
+      .then(() => {
+        setRedirect(true);
+      })
+      .catch(console.error);
   };
 
-  return (
+  return redirect ? (
+    <Navigate to="/admin/users" />
+  ) : (
     <section className="userRegisterPage">
       <RouterForm noValidate method="post" onSubmit={handleSubmit} id="registerUserForm">
         <h2 className="mb-4">Add new user</h2>

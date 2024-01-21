@@ -1,5 +1,3 @@
-import { type RouteObject } from 'react-router-dom';
-
 import App from './App';
 import appData from './AppData';
 import { loader as HomePageLoader } from './loaders/HomePageLoader';
@@ -7,7 +5,7 @@ import ErrorNotFoundPage from './pages/ErrorNotFoundPage';
 import Homepage from './pages/HomePage';
 import ProductDetails from './pages/ProductDetails';
 
-const customerRoutes = {
+export default {
   element: <App {...appData} />,
   children: [
     {
@@ -29,9 +27,3 @@ const customerRoutes = {
     }
   ]
 };
-
-const getCustomerRoutes = (): RouteObject => {
-  return customerRoutes;
-};
-
-export default getCustomerRoutes;

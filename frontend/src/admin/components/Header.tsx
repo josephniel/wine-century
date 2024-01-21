@@ -5,21 +5,19 @@ import { Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
-import type User from '../data/user';
+import { getUserFromAuth } from '../providers/AuthProvider';
 
-export interface HeaderProps {
-  user?: User | undefined;
-}
+const Header: React.FC = () => {
+  const user = getUserFromAuth();
 
-const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
-  const profileLink = `/admin/profile/${props.user?.id}`;
+  const profileLink = `/admin/profile/${user?.id}`;
   const logoutURL = '/admin/logout';
 
   return (
     <Navbar expand="lg" className="header bg-body-secondary">
       <Container>
         <Navbar.Brand>Wine Century Admin Page</Navbar.Brand>
-        {props.user !== undefined ? (
+        {user !== undefined ? (
           <>
             <Navbar.Collapse>
               <Nav>
@@ -29,7 +27,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
-                Signed in as: <a href={profileLink}>{props.user.firstName}</a>
+                Signed in as: <a href={profileLink}>{user.firstName}</a>
               </Navbar.Text>
               <Navbar.Text>
                 <a href={logoutURL}>Logout</a>

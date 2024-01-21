@@ -1,16 +1,14 @@
 import './UsersPage.scss';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
-import { useLoaderData } from 'react-router-dom';
 
-import { deleteUser } from '../../actions/DeleteUserAction';
-import { editUser } from '../../actions/EditUserAction';
+import { deleteUser, editUser, getUsers, USER_LIST_LIMIT } from '../../api/users';
 import type User from '../../data/user';
-import UsersPageLoader, { USER_LIST_LIMIT, type UserList } from '../../loaders/UsersPageLoader';
+import { useAuth } from '../../providers/AuthProvider';
 
 interface UserRowProps extends User {
-  deleteUser: () => void;
+  removeUserRow: () => void;
 }
 
 const UserRow: React.FC<UserRowProps> = (props) => {
@@ -20,19 +18,21 @@ const UserRow: React.FC<UserRowProps> = (props) => {
   const [lastName, setlastName] = useState(props.lastName);
   const [email, setEmail] = useState(props.email);
 
-  const saveEditedUser = async (): Promise<void> => {
-    const response = await editUser({
+  const { token } = useAuth();
+
+  const editUserHandler = async (): Promise<void> => {
+    await editUser(token, {
       id: props.id,
       firstName,
       lastName,
       email
     });
-
-    if (response.status !== 200) {
-      throw new Error(JSON.stringify(response.data));
-    }
-
     setEditable(false);
+  };
+
+  const deleteUserHandler = async (): Promise<void> => {
+    await deleteUser(token, props.id);
+    props.removeUserRow();
   };
 
   return (
@@ -74,7 +74,7 @@ const UserRow: React.FC<UserRowProps> = (props) => {
             size="sm"
             variant="success"
             onClick={() => {
-              void saveEditedUser();
+              void editUserHandler();
             }}
             style={{ marginRight: '10px' }}>
             <svg
@@ -107,7 +107,13 @@ const UserRow: React.FC<UserRowProps> = (props) => {
           </Button>
         )}
 
-        <Button size="sm" variant="danger" onClick={props.deleteUser} disabled={editable}>
+        <Button
+          size="sm"
+          variant="danger"
+          onClick={() => {
+            void deleteUserHandler();
+          }}
+          disabled={editable}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -124,30 +130,27 @@ const UserRow: React.FC<UserRowProps> = (props) => {
 };
 
 const UsersPage = (): React.ReactElement => {
-  const userList = useLoaderData() as UserList;
+  const [users, setUsers] = useState([] as User[]);
+  const [hasMore, setHasMore] = useState(true);
 
-  const [users, setUsers] = useState(userList.users);
-  const [hasMore, setHasMore] = useState(userList.hasMore);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    loadMoreUsers().catch(console.error);
+  }, []);
 
   const loadMoreUsers = async (): Promise<void> => {
     if (!hasMore) {
       return;
     }
 
-    const resp = await UsersPageLoader(USER_LIST_LIMIT, users.length)();
-    const newUsers = [...users, ...resp.users];
-    setUsers(newUsers);
-    setHasMore(resp.hasMore);
+    const userList = await getUsers(token, USER_LIST_LIMIT, users.length);
+    setUsers([...users, ...userList.users]);
+    setHasMore(userList.hasMore);
   };
 
-  const removeUser = async (id: number): Promise<void> => {
-    const resp = await deleteUser(id);
-    if (resp.status !== 204) {
-      throw new Error(JSON.stringify(resp.data));
-    }
-
-    const newUsers = [...users.filter((user: User) => user.id !== id)];
-    setUsers(newUsers);
+  const removeRow = async (id: number): Promise<void> => {
+    setUsers(users.filter((user: User) => user.id !== id));
   };
 
   return (
@@ -178,8 +181,8 @@ const UsersPage = (): React.ReactElement => {
               users.map((user: User, index: number) => (
                 <UserRow
                   {...user}
-                  deleteUser={() => {
-                    void removeUser(user.id);
+                  removeUserRow={() => {
+                    void removeRow(user.id);
                   }}
                   key={index}
                 />
