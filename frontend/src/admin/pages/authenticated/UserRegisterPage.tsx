@@ -6,6 +6,7 @@ import PasswordChecklist from 'react-password-checklist';
 import { Form as RouterForm, Navigate } from 'react-router-dom';
 
 import { registerUser } from '../../api/users';
+import { useAuth } from '../../providers/AuthProvider';
 
 const UserRegisterPage = (): React.ReactElement => {
   const [firstName, setFirstName] = useState('');
@@ -30,7 +31,8 @@ const UserRegisterPage = (): React.ReactElement => {
       return;
     }
 
-    registerUser({
+    const { token } = useAuth();
+    registerUser(token, {
       firstName,
       lastName,
       email,
