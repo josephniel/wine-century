@@ -78,20 +78,56 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 
   /admin/products:
+    get:
+      summary: List products
+      parameters:
+        - in: query
+          name: limit
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: Limit of products to get
+        - in: query
+          name: offset
+          required: true
+          schema:
+            type: integer
+            minimum: 0
+          description: Offset of products to get
+      responses:
+        '200':
+          description: Products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductListResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     post:
       summary: Create a product
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateProductRequest'
+              $ref: '#/components/schemas/ProductCreateRequest'
       responses:
         '201':
           description: Product created
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CreateProductResponse'
+                $ref: '#/components/schemas/ProductCreateResponse'
         '401':
           description: Admin not authorized
           content:
@@ -100,6 +136,93 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         '409':
           description: Product already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /admin/products/{productID}:
+    get:
+      summary: List products
+      parameters:
+        - in: path
+          name: productID
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the product to update
+      responses:
+        '200':
+          description: Products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductGetResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: Update product
+      parameters:
+        - in: path
+          name: productID
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the product to update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductEditRequest'
+      responses:
+        '200':
+          description: Edited successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductEditResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Delete product
+      parameters:
+        - in: path
+          name: productID
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the product to delete
+      responses:
+        '204':
+          description: Deleted successfully
+        '401':
+          description: Admin not authorized
           content:
             application/json:
               schema:
@@ -163,14 +286,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EditUserRequest'
+              $ref: '#/components/schemas/UserEditRequest'
       responses:
         '200':
           description: Edited successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EditUserResponse'
+                $ref: '#/components/schemas/UserEditResponse'
         '401':
           description: Admin not authorized
           content:
@@ -278,7 +401,7 @@ components:
         - createdAt
         - updatedAt
 
-    CreateProductRequest:
+    ProductCreateRequest:
       type: object
       properties:
         name:
@@ -295,7 +418,7 @@ components:
         - details
         - price
 
-    CreateProductResponse:
+    ProductCreateResponse:
       type: object
       properties:
         id:
@@ -322,7 +445,86 @@ components:
         - createdAt
         - updatedAt
 
-    EditUserRequest:
+    ProductEditRequest:
+      type: object
+      properties:
+        details:
+          type: string
+          description: Product details
+        price:
+          type: number
+          description: Product price
+      required:
+        - name
+        - details
+        - price
+
+    ProductEditResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Product id
+        name:
+          type: string
+          description: Product name
+        details:
+          type: string
+          description: Product details
+        price:
+          type: number
+          description: Product price
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - name
+        - details
+        - price
+        - createdAt
+        - updatedAt
+
+    ProductGetResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Product id
+        name:
+          type: string
+          description: Product name
+        details:
+          type: string
+          description: Product details
+        price:
+          type: number
+          description: Product price
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - name
+        - details
+        - price
+        - createdAt
+        - updatedAt
+
+    ProductListResponse:
+      type: object
+      properties:
+        products:
+          type: array
+        hasMore:
+          type: boolean
+      required:
+        - products
+        - hasMore
+
+    UserEditRequest:
       type: object
       properties:
         firstName:
@@ -339,7 +541,7 @@ components:
         - lastName
         - email
 
-    EditUserResponse:
+    UserEditResponse:
       type: object
       properties:
         id:

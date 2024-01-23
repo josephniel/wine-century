@@ -73,7 +73,31 @@ const registerProductRoutes = (
   const productsHandler = new ProductsHandler(productsRepo);
   const productsController = new ProductsController(productsHandler);
 
-  router.post('/products', authMiddleware(cache), asyncHandler(productsController.createProduct));
+  router.post(
+    '/products',
+    authMiddleware(cache),
+    asyncHandler(productsController.createRequestHandler)
+  );
+  router.get(
+    '/products/:productID',
+    authMiddleware(cache),
+    asyncHandler(productsController.getByIDRequestHandler)
+  );
+  router.get(
+    '/products',
+    authMiddleware(cache),
+    asyncHandler(productsController.listRequestHandler)
+  );
+  router.put(
+    '/products/:productID',
+    authMiddleware(cache),
+    asyncHandler(productsController.editRequestHandler)
+  );
+  router.delete(
+    '/products/:productID',
+    authMiddleware(cache),
+    asyncHandler(productsController.deleteRequestHandler)
+  );
 };
 
 export default getAdminRoutes;
