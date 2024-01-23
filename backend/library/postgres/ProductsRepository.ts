@@ -1,4 +1,5 @@
 import ProductAlreadyExistsError from '../../domain/errors/ProductAlreadyExistsError';
+import ProductNotFoundError from '../../domain/errors/ProductNotFoundError';
 import { type Database } from '../../interface/database';
 import { type Product } from '../../interface/database/entities/Product';
 import { type ProductsRepository } from '../../interface/database/repositories/ProductsRepository';
@@ -38,6 +39,92 @@ RETURNING *;
         throw new ProductAlreadyExistsError(name);
       }
       throw new Error('Product creation failed.');
+    }
+  }
+
+  async get(id: number): Promise<Product> {
+    const result = await this.database.query(
+      `
+SELECT * FROM products WHERE id = $1;
+`,
+      [id]
+    );
+
+    const dbProduct: any = result[0] ?? undefined;
+    if (dbProduct === undefined) {
+      throw new ProductNotFoundError(id);
+    }
+
+    const user: Product = {
+      id: dbProduct.id,
+      name: dbProduct.name,
+      details: dbProduct.details,
+      price: dbProduct.price,
+      createdAt: new Date(dbProduct.created_at as number),
+      updatedAt: new Date(dbProduct.updated_at as number)
+    };
+
+    return user;
+  }
+
+  async list(limit: number, offset: number): Promise<Product[]> {
+    const result = await this.database.query(
+      `
+SELECT * FROM products ORDER BY id ASC LIMIT $1 OFFSET $2;
+      `,
+      [limit, offset]
+    );
+
+    return result.map((dbProduct: any) => ({
+      id: dbProduct.id,
+      name: dbProduct.name,
+      details: dbProduct.details,
+      price: dbProduct.price,
+      createdAt: new Date(dbProduct.created_at as number),
+      updatedAt: new Date(dbProduct.updated_at as number)
+    }));
+  }
+
+  async update(id: number, details: string, price: number): Promise<Product> {
+    try {
+      const result = await this.database.query(
+        `
+UPDATE products
+SET 
+  details = $1,
+  price = $2
+WHERE id = $3
+RETURNING *;
+  `,
+        [details, price, id]
+      );
+
+      const dbProduct: any = result[0];
+      const product: Product = {
+        id: dbProduct.id,
+        name: dbProduct.name,
+        details: dbProduct.details,
+        price: dbProduct.price,
+        createdAt: new Date(dbProduct.created_at as number),
+        updatedAt: new Date(dbProduct.updated_at as number)
+      };
+      return product;
+    } catch (err: any) {
+      throw new Error('Admin update failed.');
+    }
+  }
+
+  async delete(id: number): Promise<void> {
+    try {
+      await this.database.query(
+        `
+  DELETE FROM products
+  WHERE id = $1;
+  `,
+        [id]
+      );
+    } catch (err: any) {
+      throw new Error('Product deletion failed.');
     }
   }
 }
