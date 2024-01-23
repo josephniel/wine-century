@@ -21,7 +21,7 @@ export const errorMiddleware =
     // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
     if ((err as any).errors) {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/strict-boolean-expressions
-      response.status((err as any).status || 500).json({
+      response.status((err as any).status ?? 500).json({
         errorCode: 'VALIDATION_ERROR',
         errorMessage: err.message,
         errors: (err as any).errors

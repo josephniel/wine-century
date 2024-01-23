@@ -77,6 +77,40 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
+  /admin/products:
+    post:
+      summary: Create a product
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+      responses:
+        '201':
+          description: Product created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateProductResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Product already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /admin/users:
     get:
       summary: List users
@@ -241,6 +275,50 @@ components:
         - firstName
         - lastName
         - email
+        - createdAt
+        - updatedAt
+
+    CreateProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Product name
+        details:
+          type: string
+          description: Product details
+        price:
+          type: number
+          description: Product price
+      required:
+        - name
+        - details
+        - price
+
+    CreateProductResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Product id
+        name:
+          type: string
+          description: Product name
+        details:
+          type: string
+          description: Product details
+        price:
+          type: number
+          description: Product price
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - name
+        - details
+        - price
         - createdAt
         - updatedAt
 
