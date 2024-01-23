@@ -36,8 +36,8 @@ SELECT * FROM admin_users WHERE email = $1;
       lastName: dbUser.last_name,
       email: dbUser.email,
       hashedPassword: dbUser.password_hash,
-      createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at as string)),
-      updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at as string))
+      createdAt: new Date(dbUser.created_at as number),
+      updatedAt: new Date(dbUser.updated_at as number)
     };
 
     return user;
@@ -66,8 +66,8 @@ RETURNING *;
         lastName: dbUser.last_name,
         email: dbUser.email,
         hashedPassword: dbUser.password_hash,
-        createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at as string)),
-        updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at as string))
+        createdAt: new Date(dbUser.created_at as number),
+        updatedAt: new Date(dbUser.updated_at as number)
       };
       return user;
     } catch (err: any) {
@@ -92,8 +92,8 @@ SELECT * FROM admin_users WHERE id != $1 ORDER BY id ASC LIMIT $2 OFFSET $3;
       lastName: dbUser.last_name,
       email: dbUser.email,
       hashedPassword: dbUser.password_hash,
-      createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at as string)),
-      updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at as string))
+      createdAt: new Date(dbUser.created_at as number),
+      updatedAt: new Date(dbUser.updated_at as number)
     }));
   }
 
@@ -124,8 +124,8 @@ RETURNING *;
         lastName: dbUser.last_name,
         email: dbUser.email,
         hashedPassword: dbUser.password_hash,
-        createdAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.created_at as string)),
-        updatedAt: new Date(0, 0, 0, 0, 0, 0, Date.parse(dbUser.updated_at as string))
+        createdAt: new Date(dbUser.created_at as number),
+        updatedAt: new Date(dbUser.updated_at as number)
       };
       return user;
     } catch (err: any) {

@@ -59,8 +59,8 @@ export class UsersHandler {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      createdAt: user.createdAt.toUTCString(),
-      updatedAt: user.updatedAt.toUTCString()
+      createdAt: user.createdAt.toISOString(),
+      updatedAt: user.updatedAt.toISOString()
     };
     return response;
   }
