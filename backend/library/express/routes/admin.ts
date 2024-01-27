@@ -6,8 +6,10 @@ import { UsersHandler } from '../../../domain/admin/users';
 import { type Cache } from '../../../interface/cache';
 import { type Database } from '../../../interface/database';
 import { type AdminUserRepository } from '../../../interface/database/repositories/AdminUserRepository';
+import { type ProductCategoriesRepository } from '../../../interface/database/repositories/ProductCategoriesRepository';
 import { type ProductsRepository } from '../../../interface/database/repositories/ProductsRepository';
 import { PostgresAdminUserRepository } from '../../postgres/AdminUserRepository';
+import { PostgresProductCategoriesRepository } from '../../postgres/ProductCategoriesRepository';
 import { PostgresProductsRepository } from '../../postgres/ProductsRepository';
 import { AccessController } from '../controller/admin/access';
 import { ProductsController } from '../controller/admin/products';
@@ -20,10 +22,11 @@ const getAdminRoutes = (database: Database, cache: Cache): Router => {
 
   const adminUserRepo = new PostgresAdminUserRepository(database);
   const productsRepo = new PostgresProductsRepository(database);
+  const productCategoriesRepo = new PostgresProductCategoriesRepository(database);
 
   registerAccessRoutes(router, cache, adminUserRepo);
   registerUserRoutes(router, cache, adminUserRepo);
-  registerProductRoutes(router, cache, productsRepo);
+  registerProductRoutes(router, cache, productsRepo, productCategoriesRepo);
 
   return router;
 };
@@ -68,35 +71,62 @@ const registerUserRoutes = (
 const registerProductRoutes = (
   router: Router,
   cache: Cache,
-  productsRepo: ProductsRepository
+  productsRepo: ProductsRepository,
+  productCategoriesRepo: ProductCategoriesRepository
 ): void => {
-  const productsHandler = new ProductsHandler(productsRepo);
+  const productsHandler = new ProductsHandler(productsRepo, productCategoriesRepo);
   const productsController = new ProductsController(productsHandler);
 
   router.post(
     '/products',
     authMiddleware(cache),
-    asyncHandler(productsController.createRequestHandler)
+    asyncHandler(productsController.createProductRequestHandler)
   );
   router.get(
     '/products/:productID',
     authMiddleware(cache),
-    asyncHandler(productsController.getByIDRequestHandler)
+    asyncHandler(productsController.getProductByIDRequestHandler)
   );
   router.get(
     '/products',
     authMiddleware(cache),
-    asyncHandler(productsController.listRequestHandler)
+    asyncHandler(productsController.listProductsRequestHandler)
   );
   router.put(
     '/products/:productID',
     authMiddleware(cache),
-    asyncHandler(productsController.editRequestHandler)
+    asyncHandler(productsController.editProductRequestHandler)
   );
   router.delete(
     '/products/:productID',
     authMiddleware(cache),
-    asyncHandler(productsController.deleteRequestHandler)
+    asyncHandler(productsController.deleteProductRequestHandler)
+  );
+
+  router.post(
+    '/products/categories',
+    authMiddleware(cache),
+    asyncHandler(productsController.createProductCategoryRequestHandler)
+  );
+  router.get(
+    '/products/categories/:productCategoryID',
+    authMiddleware(cache),
+    asyncHandler(productsController.getProductCategoryByIDRequestHandler)
+  );
+  router.get(
+    '/products/categories',
+    authMiddleware(cache),
+    asyncHandler(productsController.listProductCategoriesRequestHandler)
+  );
+  router.put(
+    '/products/categories/:productCategoryID',
+    authMiddleware(cache),
+    asyncHandler(productsController.editProductCategoryRequestHandler)
+  );
+  router.delete(
+    '/products/categories/:productCategoryID',
+    authMiddleware(cache),
+    asyncHandler(productsController.deleteProductCategoryRequestHandler)
   );
 };
 

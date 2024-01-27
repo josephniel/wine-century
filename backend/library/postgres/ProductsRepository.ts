@@ -9,11 +9,9 @@ export class PostgresProductsRepository implements ProductsRepository {
 
   constructor(database: Database) {
     this.database = database;
-
-    this.create = this.create.bind(this);
   }
 
-  async create(name: string, details: string, price: number): Promise<Product> {
+  create = async (name: string, details: string, price: number): Promise<Product> => {
     try {
       const result = await this.database.query(
         `
@@ -40,9 +38,9 @@ RETURNING *;
       }
       throw new Error('Product creation failed.');
     }
-  }
+  };
 
-  async get(id: number): Promise<Product> {
+  get = async (id: number): Promise<Product> => {
     const result = await this.database.query(
       `
 SELECT * FROM products WHERE id = $1;
@@ -55,7 +53,7 @@ SELECT * FROM products WHERE id = $1;
       throw new ProductNotFoundError(id);
     }
 
-    const user: Product = {
+    const product: Product = {
       id: dbProduct.id,
       name: dbProduct.name,
       details: dbProduct.details,
@@ -64,10 +62,10 @@ SELECT * FROM products WHERE id = $1;
       updatedAt: new Date(dbProduct.updated_at as number)
     };
 
-    return user;
-  }
+    return product;
+  };
 
-  async list(limit: number, offset: number): Promise<Product[]> {
+  list = async (limit: number, offset: number): Promise<Product[]> => {
     const result = await this.database.query(
       `
 SELECT * FROM products ORDER BY id ASC LIMIT $1 OFFSET $2;
@@ -83,9 +81,9 @@ SELECT * FROM products ORDER BY id ASC LIMIT $1 OFFSET $2;
       createdAt: new Date(dbProduct.created_at as number),
       updatedAt: new Date(dbProduct.updated_at as number)
     }));
-  }
+  };
 
-  async update(id: number, details: string, price: number): Promise<Product> {
+  update = async (id: number, details: string, price: number): Promise<Product> => {
     try {
       const result = await this.database.query(
         `
@@ -112,9 +110,9 @@ RETURNING *;
     } catch (err: any) {
       throw new Error('Admin update failed.');
     }
-  }
+  };
 
-  async delete(id: number): Promise<void> {
+  delete = async (id: number): Promise<void> => {
     try {
       await this.database.query(
         `
@@ -126,5 +124,5 @@ RETURNING *;
     } catch (err: any) {
       throw new Error('Product deletion failed.');
     }
-  }
+  };
 }

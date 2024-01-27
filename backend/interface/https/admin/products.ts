@@ -42,3 +42,37 @@ export interface EditProductResponse extends Product {}
 export interface DeleteProductRequest {
   id: number;
 }
+
+export interface ProductCategory {
+  id: number;
+  name: string;
+  createdAt: string;
+}
+
+export interface CreateProductCategoryRequest {
+  name: string;
+}
+
+export interface CreateProductCategoryResponse extends ProductCategory {}
+
+export interface GetProductCategoryRequest {
+  id: number;
+}
+
+export interface GetProductCategoryResponse extends ProductCategory {}
+
+export interface ListProductCategoriesResponse {
+  productCategories: ProductCategory[];
+  hasMore: boolean;
+}
+
+export interface EditProductCategoryRequest {
+  id: number;
+  name: string;
+}
+
+export interface EditProductCategoryResponse extends ProductCategory {}
+
+export interface DeleteProductCategoryRequest {
+  id: number;
+}

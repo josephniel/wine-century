@@ -1,19 +1,14 @@
 import { type AdminUser } from '../entities/AdminUser';
 
 export interface AdminUserRepository {
-  getUserUsingEmail: (email: string) => Promise<AdminUser>;
-  createUser: (
+  getByEmail: (email: string) => Promise<AdminUser>;
+  create: (
     firstName: string,
     lastName: string,
     email: string,
     password: string
   ) => Promise<AdminUser>;
-  listUsers: (id: number, limit: number, offset: number) => Promise<AdminUser[]>;
-  updateUser: (
-    id: number,
-    firstName: string,
-    lastName: string,
-    email: string
-  ) => Promise<AdminUser>;
-  deleteUser: (id: number) => Promise<void>;
+  list: (id: number, limit: number, offset: number) => Promise<AdminUser[]>;
+  update: (id: number, firstName: string, lastName: string, email: string) => Promise<AdminUser>;
+  delete: (id: number) => Promise<void>;
 }

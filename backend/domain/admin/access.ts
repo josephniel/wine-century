@@ -17,13 +17,10 @@ export class AccessHandler {
   constructor(adminUserRepo: AdminUserRepository, cache: Cache) {
     this.adminUserRepo = adminUserRepo;
     this.cache = cache;
-
-    this.login = this.login.bind(this);
-    this.signup = this.signup.bind(this);
   }
 
-  async login(loginRequest: LoginRequest): Promise<LoginResponse> {
-    const user = await this.adminUserRepo.getUserUsingEmail(loginRequest.email);
+  login = async (loginRequest: LoginRequest): Promise<LoginResponse> => {
+    const user = await this.adminUserRepo.getByEmail(loginRequest.email);
 
     if (!(await hasher.verify(user.hashedPassword, loginRequest.password))) {
       throw new AdminUserNotAuthenticatedError(user);
@@ -40,11 +37,11 @@ export class AccessHandler {
       user.hashedPassword
     );
     return { token };
-  }
+  };
 
-  async signup(signupRequest: SignupRequest): Promise<SignupResponse> {
+  signup = async (signupRequest: SignupRequest): Promise<SignupResponse> => {
     const hashedPassword = await hasher.hash(signupRequest.password);
-    const user = await this.adminUserRepo.createUser(
+    const user = await this.adminUserRepo.create(
       signupRequest.firstName,
       signupRequest.lastName,
       signupRequest.email,
@@ -60,5 +57,5 @@ export class AccessHandler {
       updatedAt: user.updatedAt.toISOString()
     };
     return response;
-  }
+  };
 }
