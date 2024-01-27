@@ -14,14 +14,10 @@ export class UsersHandler {
 
   constructor(adminUserRepo: AdminUserRepository) {
     this.adminUserRepo = adminUserRepo;
-
-    this.list = this.list.bind(this);
-    this.edit = this.edit.bind(this);
-    this.delete = this.delete.bind(this);
   }
 
-  async list(listUsersRequest: ListUsersRequest): Promise<ListUsersResponse> {
-    let users = await this.adminUserRepo.listUsers(
+  list = async (listUsersRequest: ListUsersRequest): Promise<ListUsersResponse> => {
+    let users = await this.adminUserRepo.list(
       listUsersRequest.requestUserID,
       listUsersRequest.limit + 1,
       listUsersRequest.offset
@@ -44,10 +40,10 @@ export class UsersHandler {
       ),
       hasMore
     };
-  }
+  };
 
-  async edit(editUserRequest: EditUserRequest): Promise<EditUserResponse> {
-    const user = await this.adminUserRepo.updateUser(
+  edit = async (editUserRequest: EditUserRequest): Promise<EditUserResponse> => {
+    const user = await this.adminUserRepo.update(
       editUserRequest.id,
       editUserRequest.firstName,
       editUserRequest.lastName,
@@ -63,10 +59,10 @@ export class UsersHandler {
       updatedAt: user.updatedAt.toISOString()
     };
     return response;
-  }
+  };
 
-  async delete(deleteUserRequest: DeleteUserRequest): Promise<null> {
-    await this.adminUserRepo.deleteUser(deleteUserRequest.id);
+  delete = async (deleteUserRequest: DeleteUserRequest): Promise<null> => {
+    await this.adminUserRepo.delete(deleteUserRequest.id);
     return null;
-  }
+  };
 }

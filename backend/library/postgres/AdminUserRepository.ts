@@ -9,15 +9,9 @@ export class PostgresAdminUserRepository implements AdminUserRepository {
 
   constructor(database: Database) {
     this.database = database;
-
-    this.getUserUsingEmail = this.getUserUsingEmail.bind(this);
-    this.createUser = this.createUser.bind(this);
-    this.listUsers = this.listUsers.bind(this);
-    this.updateUser = this.updateUser.bind(this);
-    this.deleteUser = this.deleteUser.bind(this);
   }
 
-  async getUserUsingEmail(email: string): Promise<AdminUser> {
+  getByEmail = async (email: string): Promise<AdminUser> => {
     const result = await this.database.query(
       `
 SELECT * FROM admin_users WHERE email = $1;
@@ -41,14 +35,14 @@ SELECT * FROM admin_users WHERE email = $1;
     };
 
     return user;
-  }
+  };
 
-  async createUser(
+  create = async (
     firstName: string,
     lastName: string,
     email: string,
     password: string
-  ): Promise<AdminUser> {
+  ): Promise<AdminUser> => {
     try {
       const result = await this.database.query(
         `
@@ -76,9 +70,9 @@ RETURNING *;
       }
       throw new Error('Admin creation failed.');
     }
-  }
+  };
 
-  async listUsers(id: number, limit: number, offset: number): Promise<AdminUser[]> {
+  list = async (id: number, limit: number, offset: number): Promise<AdminUser[]> => {
     const result = await this.database.query(
       `
 SELECT * FROM admin_users WHERE id != $1 ORDER BY id ASC LIMIT $2 OFFSET $3;
@@ -95,14 +89,14 @@ SELECT * FROM admin_users WHERE id != $1 ORDER BY id ASC LIMIT $2 OFFSET $3;
       createdAt: new Date(dbUser.created_at as number),
       updatedAt: new Date(dbUser.updated_at as number)
     }));
-  }
+  };
 
-  async updateUser(
+  update = async (
     id: number,
     firstName: string,
     lastName: string,
     email: string
-  ): Promise<AdminUser> {
+  ): Promise<AdminUser> => {
     try {
       const result = await this.database.query(
         `
@@ -134,9 +128,9 @@ RETURNING *;
       }
       throw new Error('Admin update failed.');
     }
-  }
+  };
 
-  async deleteUser(id: number): Promise<void> {
+  delete = async (id: number): Promise<void> => {
     try {
       await this.database.query(
         `
@@ -148,5 +142,5 @@ RETURNING *;
     } catch (err: any) {
       throw new Error('Admin deletion failed.');
     }
-  }
+  };
 }

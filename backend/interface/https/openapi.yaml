@@ -234,6 +234,148 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
 
+  /admin/products/categories:
+    get:
+      summary: List product categories
+      responses:
+        '200':
+          description: Product Categories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCategoryListResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Create a product categories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCategoryCreateRequest'
+      responses:
+        '201':
+          description: Product category created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCategoryCreateResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Product category already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /admin/products/categories/{productCategoryID}:
+    get:
+      summary: Get product category
+      parameters:
+        - in: path
+          name: productCategoryID
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the product category
+      responses:
+        '200':
+          description: Product Category
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCategoryGetResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: Update product category
+      parameters:
+        - in: path
+          name: productCategoryID
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the product category to update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductCategoryEditRequest'
+      responses:
+        '200':
+          description: Edited successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductCategoryEditResponse'
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: Delete product category
+      parameters:
+        - in: path
+          name: productCategoryID
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the product category to delete
+      responses:
+        '204':
+          description: Deleted successfully
+        '401':
+          description: Admin not authorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
   /admin/users:
     get:
       summary: List users
@@ -455,7 +597,6 @@ components:
           type: number
           description: Product price
       required:
-        - name
         - details
         - price
 
@@ -522,6 +663,83 @@ components:
           type: boolean
       required:
         - products
+        - hasMore
+
+    ProductCategoryCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Product category name
+      required:
+        - name
+
+    ProductCategoryCreateResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Product category id
+        name:
+          type: string
+          description: Product category name
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - createdAt
+
+    ProductCategoryEditRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Product category name
+      required:
+        - name
+
+    ProductCategoryEditResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Product id
+        name:
+          type: string
+          description: Product name
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - createdAt
+
+    ProductCategoryGetResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Product id
+        name:
+          type: string
+          description: Product name
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - createdAt
+
+    ProductCategoryListResponse:
+      type: object
+      properties:
+        productCategories:
+          type: array
+        hasMore:
+          type: boolean
+      required:
+        - productCategories
         - hasMore
 
     UserEditRequest:

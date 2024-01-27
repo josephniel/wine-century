@@ -1,32 +1,42 @@
 import { type Product as DBProduct } from '../../interface/database/entities/Product';
+import { type ProductCategory as DBProductCategory } from '../../interface/database/entities/ProductCategory';
+import { type ProductCategoriesRepository } from '../../interface/database/repositories/ProductCategoriesRepository';
 import { type ProductsRepository } from '../../interface/database/repositories/ProductsRepository';
 import {
+  type CreateProductCategoryRequest,
+  type CreateProductCategoryResponse,
   type CreateProductRequest,
   type CreateProductResponse,
+  type DeleteProductCategoryRequest,
   type DeleteProductRequest,
+  type EditProductCategoryRequest,
+  type EditProductCategoryResponse,
   type EditProductRequest,
   type EditProductResponse,
+  type GetProductCategoryRequest,
+  type GetProductCategoryResponse,
   type GetProductRequest,
   type GetProductResponse,
+  type ListProductCategoriesResponse,
   type ListProductsRequest,
   type ListProductsResponse,
-  type Product
+  type Product,
+  type ProductCategory
 } from '../../interface/https/admin/products';
 
 export class ProductsHandler {
   private readonly productsRepo: ProductsRepository;
+  private readonly productCategoriesRepo: ProductCategoriesRepository;
 
-  constructor(productsRepo: ProductsRepository) {
+  constructor(
+    productsRepo: ProductsRepository,
+    productCategoriesRepo: ProductCategoriesRepository
+  ) {
     this.productsRepo = productsRepo;
-
-    this.create = this.create.bind(this);
-    this.get = this.get.bind(this);
-    this.list = this.list.bind(this);
-    this.edit = this.edit.bind(this);
-    this.delete = this.delete.bind(this);
+    this.productCategoriesRepo = productCategoriesRepo;
   }
 
-  async create(request: CreateProductRequest): Promise<CreateProductResponse> {
+  createProduct = async (request: CreateProductRequest): Promise<CreateProductResponse> => {
     const product = await this.productsRepo.create(request.name, request.details, request.price);
 
     const response: CreateProductResponse = {
@@ -38,9 +48,9 @@ export class ProductsHandler {
       updatedAt: product.updatedAt.toISOString()
     };
     return response;
-  }
+  };
 
-  async get(request: GetProductRequest): Promise<GetProductResponse> {
+  getProductByID = async (request: GetProductRequest): Promise<GetProductResponse> => {
     const product = await this.productsRepo.get(request.id);
 
     const response: GetProductResponse = {
@@ -52,9 +62,9 @@ export class ProductsHandler {
       updatedAt: product.updatedAt.toISOString()
     };
     return response;
-  }
+  };
 
-  async list(request: ListProductsRequest): Promise<ListProductsResponse> {
+  listProducts = async (request: ListProductsRequest): Promise<ListProductsResponse> => {
     let products = await this.productsRepo.list(request.limit + 1, request.offset);
 
     let hasMore = false;
@@ -76,9 +86,9 @@ export class ProductsHandler {
       ),
       hasMore
     };
-  }
+  };
 
-  async edit(request: EditProductRequest): Promise<EditProductResponse> {
+  editProduct = async (request: EditProductRequest): Promise<EditProductResponse> => {
     const product = await this.productsRepo.update(request.id, request.details, request.price);
 
     const response: EditProductResponse = {
@@ -90,10 +100,69 @@ export class ProductsHandler {
       updatedAt: product.updatedAt.toISOString()
     };
     return response;
-  }
+  };
 
-  async delete(request: DeleteProductRequest): Promise<null> {
+  deleteProduct = async (request: DeleteProductRequest): Promise<null> => {
     await this.productsRepo.delete(request.id);
     return null;
-  }
+  };
+
+  createProductCategory = async (
+    request: CreateProductCategoryRequest
+  ): Promise<CreateProductCategoryResponse> => {
+    const product = await this.productCategoriesRepo.create(request.name);
+
+    const response: CreateProductCategoryResponse = {
+      id: product.id,
+      name: product.name,
+      createdAt: product.createdAt.toISOString()
+    };
+    return response;
+  };
+
+  getProductCategoryByID = async (
+    request: GetProductCategoryRequest
+  ): Promise<GetProductCategoryResponse> => {
+    const product = await this.productCategoriesRepo.get(request.id);
+
+    const response: GetProductCategoryResponse = {
+      id: product.id,
+      name: product.name,
+      createdAt: product.createdAt.toISOString()
+    };
+    return response;
+  };
+
+  listProductCategories = async (): Promise<ListProductCategoriesResponse> => {
+    const productCategories = await this.productCategoriesRepo.list();
+
+    return {
+      productCategories: productCategories.map(
+        (productCategory: DBProductCategory): ProductCategory => ({
+          id: productCategory.id,
+          name: productCategory.name,
+          createdAt: productCategory.createdAt.toISOString()
+        })
+      ),
+      hasMore: false
+    };
+  };
+
+  editProductCategory = async (
+    request: EditProductCategoryRequest
+  ): Promise<EditProductCategoryResponse> => {
+    const product = await this.productCategoriesRepo.update(request.id, request.name);
+
+    const response: EditProductCategoryResponse = {
+      id: product.id,
+      name: product.name,
+      createdAt: product.createdAt.toISOString()
+    };
+    return response;
+  };
+
+  deleteProductCategory = async (request: DeleteProductCategoryRequest): Promise<null> => {
+    await this.productsRepo.delete(request.id);
+    return null;
+  };
 }
