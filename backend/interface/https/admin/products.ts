@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   details: string;
   price: number;
+  categoryID: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -11,6 +12,7 @@ export interface CreateProductRequest {
   name: string;
   price: number;
   details: string;
+  categoryID: number;
 }
 
 export interface CreateProductResponse extends Product {}
@@ -22,6 +24,7 @@ export interface GetProductRequest {
 export interface GetProductResponse extends Product {}
 
 export interface ListProductsRequest {
+  categoryID: number;
   limit: number;
   offset: number;
 }

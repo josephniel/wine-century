@@ -82,6 +82,12 @@ paths:
       summary: List products
       parameters:
         - in: query
+          name: categoryID
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+        - in: query
           name: limit
           required: true
           schema:
@@ -555,10 +561,14 @@ components:
         price:
           type: number
           description: Product price
+        categoryID:
+          type: number
+          description: Category ID
       required:
         - name
         - details
         - price
+        - categoryID
 
     ProductCreateResponse:
       type: object
@@ -575,6 +585,9 @@ components:
         price:
           type: number
           description: Product price
+        categoryID:
+          type: number
+          description: Category ID
         createdAt:
           type: string
         updatedAt:
@@ -584,6 +597,7 @@ components:
         - name
         - details
         - price
+        - categoryID
         - createdAt
         - updatedAt
 
@@ -615,6 +629,9 @@ components:
         price:
           type: number
           description: Product price
+        categoryID:
+          type: number
+          description: Category ID
         createdAt:
           type: string
         updatedAt:
@@ -624,6 +641,7 @@ components:
         - name
         - details
         - price
+        - categoryID
         - createdAt
         - updatedAt
 
@@ -642,6 +660,9 @@ components:
         price:
           type: number
           description: Product price
+        categoryID:
+          type: number
+          description: Category ID
         createdAt:
           type: string
         updatedAt:
@@ -651,6 +672,7 @@ components:
         - name
         - details
         - price
+        - categoryID
         - createdAt
         - updatedAt
 

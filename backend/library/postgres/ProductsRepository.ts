@@ -11,15 +11,20 @@ export class PostgresProductsRepository implements ProductsRepository {
     this.database = database;
   }
 
-  create = async (name: string, details: string, price: number): Promise<Product> => {
+  create = async (
+    name: string,
+    details: string,
+    price: number,
+    categoryID: number
+  ): Promise<Product> => {
     try {
       const result = await this.database.query(
         `
-INSERT INTO products(name, details, price)
-VALUES ($1, $2, $3)
+INSERT INTO products(name, details, price, category_id)
+VALUES ($1, $2, $3, $4)
 RETURNING *;
   `,
-        [name, details, price]
+        [name, details, price, categoryID]
       );
 
       const dbProduct: any = result[0];
@@ -28,6 +33,7 @@ RETURNING *;
         name: dbProduct.name,
         details: dbProduct.details,
         price: Number(dbProduct.price),
+        categoryID: Number(dbProduct.category_id),
         createdAt: new Date(dbProduct.created_at as number),
         updatedAt: new Date(dbProduct.updated_at as number)
       };
@@ -57,7 +63,8 @@ SELECT * FROM products WHERE id = $1;
       id: dbProduct.id,
       name: dbProduct.name,
       details: dbProduct.details,
-      price: dbProduct.price,
+      price: Number(dbProduct.price),
+      categoryID: Number(dbProduct.category_id),
       createdAt: new Date(dbProduct.created_at as number),
       updatedAt: new Date(dbProduct.updated_at as number)
     };
@@ -65,19 +72,20 @@ SELECT * FROM products WHERE id = $1;
     return product;
   };
 
-  list = async (limit: number, offset: number): Promise<Product[]> => {
+  list = async (categoryID: number, limit: number, offset: number): Promise<Product[]> => {
     const result = await this.database.query(
       `
-SELECT * FROM products ORDER BY id ASC LIMIT $1 OFFSET $2;
+SELECT * FROM products WHERE category_id = $1 ORDER BY id DESC LIMIT $2 OFFSET $3;
       `,
-      [limit, offset]
+      [categoryID, limit, offset]
     );
 
     return result.map((dbProduct: any) => ({
       id: dbProduct.id,
       name: dbProduct.name,
       details: dbProduct.details,
-      price: dbProduct.price,
+      price: Number(dbProduct.price),
+      categoryID: Number(dbProduct.category_id),
       createdAt: new Date(dbProduct.created_at as number),
       updatedAt: new Date(dbProduct.updated_at as number)
     }));
@@ -102,7 +110,8 @@ RETURNING *;
         id: dbProduct.id,
         name: dbProduct.name,
         details: dbProduct.details,
-        price: dbProduct.price,
+        price: Number(dbProduct.price),
+        categoryID: Number(dbProduct.category_id),
         createdAt: new Date(dbProduct.created_at as number),
         updatedAt: new Date(dbProduct.updated_at as number)
       };
