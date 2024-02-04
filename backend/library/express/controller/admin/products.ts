@@ -49,6 +49,7 @@ export class ProductsController {
 
   listProductsRequestHandler = async (request: Request, response: Response): Promise<void> => {
     const body: ListProductsRequest = {
+      categoryID: Number(request.query['categoryID']),
       limit: Number(request.query['limit']),
       offset: Number(request.query['offset'])
     };

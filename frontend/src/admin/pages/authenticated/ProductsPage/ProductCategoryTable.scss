@@ -1,0 +1,36 @@
+.productCategoryTable {
+  th,
+  td {
+    vertical-align: middle;
+  }
+
+  tbody {
+    th,
+    td {
+      padding: 0.125rem 0.5rem !important;
+    }
+  }
+
+  .actionsColumn {
+    width: 150px;
+    text-align: center;
+  }
+
+  .form-control-plaintext {
+    padding: 0.375rem 0.75rem;
+    border: var(--bs-border-width) solid transparent;
+    cursor: default;
+  }
+
+  .deleteProductCategoryIcon,
+  .editProductCategoryIcon {
+    margin: 5px 0 5px 5px;
+    padding: 10px;
+
+    svg {
+      width: 15px;
+      height: 15px;
+      display: block;
+    }
+  }
+}

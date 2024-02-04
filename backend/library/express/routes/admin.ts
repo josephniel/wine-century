@@ -78,32 +78,6 @@ const registerProductRoutes = (
   const productsController = new ProductsController(productsHandler);
 
   router.post(
-    '/products',
-    authMiddleware(cache),
-    asyncHandler(productsController.createProductRequestHandler)
-  );
-  router.get(
-    '/products/:productID',
-    authMiddleware(cache),
-    asyncHandler(productsController.getProductByIDRequestHandler)
-  );
-  router.get(
-    '/products',
-    authMiddleware(cache),
-    asyncHandler(productsController.listProductsRequestHandler)
-  );
-  router.put(
-    '/products/:productID',
-    authMiddleware(cache),
-    asyncHandler(productsController.editProductRequestHandler)
-  );
-  router.delete(
-    '/products/:productID',
-    authMiddleware(cache),
-    asyncHandler(productsController.deleteProductRequestHandler)
-  );
-
-  router.post(
     '/products/categories',
     authMiddleware(cache),
     asyncHandler(productsController.createProductCategoryRequestHandler)
@@ -127,6 +101,32 @@ const registerProductRoutes = (
     '/products/categories/:productCategoryID',
     authMiddleware(cache),
     asyncHandler(productsController.deleteProductCategoryRequestHandler)
+  );
+
+  router.post(
+    '/products',
+    authMiddleware(cache),
+    asyncHandler(productsController.createProductRequestHandler)
+  );
+  router.get(
+    '/products/:productID',
+    authMiddleware(cache),
+    asyncHandler(productsController.getProductByIDRequestHandler)
+  );
+  router.get(
+    '/products',
+    authMiddleware(cache),
+    asyncHandler(productsController.listProductsRequestHandler)
+  );
+  router.put(
+    '/products/:productID',
+    authMiddleware(cache),
+    asyncHandler(productsController.editProductRequestHandler)
+  );
+  router.delete(
+    '/products/:productID',
+    authMiddleware(cache),
+    asyncHandler(productsController.deleteProductRequestHandler)
   );
 };
 

@@ -37,13 +37,19 @@ export class ProductsHandler {
   }
 
   createProduct = async (request: CreateProductRequest): Promise<CreateProductResponse> => {
-    const product = await this.productsRepo.create(request.name, request.details, request.price);
+    const product = await this.productsRepo.create(
+      request.name,
+      request.details,
+      request.price,
+      request.categoryID
+    );
 
     const response: CreateProductResponse = {
       id: product.id,
       name: product.name,
       details: product.details,
       price: product.price,
+      categoryID: product.categoryID,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString()
     };
@@ -58,6 +64,7 @@ export class ProductsHandler {
       name: product.name,
       details: product.details,
       price: product.price,
+      categoryID: product.categoryID,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString()
     };
@@ -65,7 +72,11 @@ export class ProductsHandler {
   };
 
   listProducts = async (request: ListProductsRequest): Promise<ListProductsResponse> => {
-    let products = await this.productsRepo.list(request.limit + 1, request.offset);
+    let products = await this.productsRepo.list(
+      request.categoryID,
+      request.limit + 1,
+      request.offset
+    );
 
     let hasMore = false;
     if (products.length > request.limit) {
@@ -80,6 +91,7 @@ export class ProductsHandler {
           name: product.name,
           details: product.details,
           price: product.price,
+          categoryID: product.categoryID,
           createdAt: product.createdAt.toISOString(),
           updatedAt: product.updatedAt.toISOString()
         })
@@ -96,6 +108,7 @@ export class ProductsHandler {
       name: product.name,
       details: product.details,
       price: product.price,
+      categoryID: product.categoryID,
       createdAt: product.createdAt.toISOString(),
       updatedAt: product.updatedAt.toISOString()
     };
@@ -162,7 +175,7 @@ export class ProductsHandler {
   };
 
   deleteProductCategory = async (request: DeleteProductCategoryRequest): Promise<null> => {
-    await this.productsRepo.delete(request.id);
+    await this.productCategoriesRepo.delete(request.id);
     return null;
   };
 }
