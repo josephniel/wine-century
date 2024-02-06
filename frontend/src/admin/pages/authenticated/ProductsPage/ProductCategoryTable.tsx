@@ -199,7 +199,7 @@ const ProductCategoryTable: React.FC<ProductCategoryTableProps> = (props) => {
     <>
       <AddProductCategoryForm addCategory={addCategory} />
       <Table hover bordered className="productCategoryTable">
-        <thead>
+        <thead className="table-light">
           <tr>
             <th className="text-center">ID</th>
             <th>Name</th>
