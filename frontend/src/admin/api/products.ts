@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import config from './config';
 import type Product from '../data/product';
 import type ProductCategory from '../data/productCategory';
+import config from './config';
 
 export const PRODUCT_LIST_LIMIT = 10;
 

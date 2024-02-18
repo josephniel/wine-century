@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import config from './config';
 import type User from '../data/user';
+import config from './config';
 
 export const USER_LIST_LIMIT = 10;
 
