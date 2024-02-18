@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import config from './config';
 import type User from '../data/user';
 
 export const USER_LIST_LIMIT = 10;
@@ -9,7 +10,7 @@ export const deleteUser = async (token: string | null, id: number): Promise<void
     throw new Error('Token is required');
   }
 
-  const response = await axios.delete(`http://localhost:3030/admin/users/${id}`, {
+  const response = await axios.delete(`${config.backend_url}/admin/users/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -26,7 +27,7 @@ export const editUser = async (token: string | null, user: User): Promise<void> 
   }
 
   const response = await axios.put(
-    `http://localhost:3030/admin/users/${user.id}`,
+    `${config.backend_url}/admin/users/${user.id}`,
     {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -60,7 +61,7 @@ export const getUsers = async (
     throw new Error('Token is required');
   }
 
-  const response = await axios.get('http://localhost:3030/admin/users', {
+  const response = await axios.get(`${config.backend_url}/admin/users`, {
     params: {
       limit,
       offset
@@ -84,7 +85,7 @@ export interface LoginUser {
 
 export const loginUser = async (user: LoginUser): Promise<string> => {
   const response = await axios.post(
-    'http://localhost:3030/admin/login',
+    `${config.backend_url}/admin/login`,
     {
       email: user.email,
       password: user.password
@@ -116,7 +117,7 @@ export const registerUser = async (token: string | null, user: RegisterUser): Pr
     throw new Error('Token is required');
   }
 
-  const response = await axios.post('http://localhost:3030/admin/register', user, {
+  const response = await axios.post(`${config.backend_url}/admin/register`, user, {
     headers: {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
