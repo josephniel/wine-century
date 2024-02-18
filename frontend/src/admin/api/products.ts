@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import config from './config';
 import type Product from '../data/product';
 import type ProductCategory from '../data/productCategory';
 
@@ -25,7 +26,7 @@ export const addProduct = async (
     throw new Error('Token is required');
   }
 
-  const response = await axios.post('http://localhost:3030/admin/products', product, {
+  const response = await axios.post(`${config.backend_url}/admin/products`, product, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -43,7 +44,7 @@ export const deleteProduct = async (token: string | null, id: number): Promise<v
     throw new Error('Token is required');
   }
 
-  const response = await axios.delete(`http://localhost:3030/admin/products/${id}`, {
+  const response = await axios.delete(`${config.backend_url}/admin/products/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -56,7 +57,7 @@ export const deleteProduct = async (token: string | null, id: number): Promise<v
 
 export const editProduct = async (token: string | null, product: Product): Promise<Product> => {
   const response = await axios.put(
-    `http://localhost:3030/admin/products/${product.id}`,
+    `${config.backend_url}/admin/products/${product.id}`,
     {
       name: product.name,
       price: product.price,
@@ -86,7 +87,7 @@ export const getProducts = async (
     throw new Error('Token is required');
   }
 
-  const response = await axios.get('http://localhost:3030/admin/products', {
+  const response = await axios.get(`${config.backend_url}/admin/products`, {
     params: {
       categoryID,
       limit,
@@ -118,7 +119,7 @@ export const addProductCategory = async (
   }
 
   const response = await axios.post(
-    'http://localhost:3030/admin/products/categories',
+    `${config.backend_url}/admin/products/categories`,
     {
       name
     },
@@ -141,7 +142,7 @@ export const deleteProductCategory = async (token: string | null, id: number): P
     throw new Error('Token is required');
   }
 
-  const response = await axios.delete(`http://localhost:3030/admin/products/categories/${id}`, {
+  const response = await axios.delete(`${config.backend_url}/admin/products/categories/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -162,7 +163,7 @@ export const editProductCategory = async (
   }
 
   const response = await axios.put(
-    `http://localhost:3030/admin/products/categories/${id}`,
+    `${config.backend_url}/admin/products/categories/${id}`,
     {
       name
     },
@@ -185,7 +186,7 @@ export const getProductCategories = async (token: string | null): Promise<Produc
     throw new Error('Token is required');
   }
 
-  const response = await axios.get('http://localhost:3030/admin/products/categories', {
+  const response = await axios.get(`${config.backend_url}/admin/products/categories`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
