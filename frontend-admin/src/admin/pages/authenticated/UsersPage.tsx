@@ -1,5 +1,4 @@
 import './UsersPage.scss';
-import './Multiselect.css';
 
 import { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, Row, Table } from 'react-bootstrap';
