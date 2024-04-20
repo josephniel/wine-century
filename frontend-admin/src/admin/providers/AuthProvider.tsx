@@ -46,7 +46,8 @@ export const getUserFromAuth = (): User | undefined => {
       id: decoded.data.id,
       firstName: decoded.data.firstName,
       lastName: decoded.data.lastName,
-      email: decoded.data.email
+      email: decoded.data.email,
+      permissions: decoded.data.permissions
     };
   };
 

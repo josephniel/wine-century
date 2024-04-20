@@ -5,10 +5,13 @@ import { Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
+import { USER_PERMISSIONS } from '../data/user';
 import { getUserFromAuth } from '../providers/AuthProvider';
 
 const Header: React.FC = () => {
   const user = getUserFromAuth();
+
+  const canViewUsers = user?.permissions.includes(USER_PERMISSIONS.VIEW_USER) ?? false;
 
   const profileLink = `/profile/${user?.id}`;
   const logoutURL = '/logout';
@@ -22,7 +25,7 @@ const Header: React.FC = () => {
             <Navbar.Collapse>
               <Nav>
                 <Nav.Link href="/products">Products</Nav.Link>
-                <Nav.Link href="/users">Users</Nav.Link>
+                {canViewUsers ? <Nav.Link href="/users">Users</Nav.Link> : null}
               </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">

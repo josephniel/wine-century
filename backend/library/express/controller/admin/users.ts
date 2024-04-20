@@ -34,7 +34,8 @@ export class UsersController {
       id: Number(request.params['userID']),
       firstName: request.body.firstName,
       lastName: request.body.lastName,
-      email: request.body.email
+      email: request.body.email,
+      permissions: request.body.permissions
     };
 
     const responseBody: EditUserResponse = await this.usersHandler.edit(body);

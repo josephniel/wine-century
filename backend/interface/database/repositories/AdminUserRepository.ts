@@ -6,9 +6,16 @@ export interface AdminUserRepository {
     firstName: string,
     lastName: string,
     email: string,
-    password: string
+    password: string,
+    permissions: string[]
   ) => Promise<AdminUser>;
   list: (id: number, limit: number, offset: number) => Promise<AdminUser[]>;
-  update: (id: number, firstName: string, lastName: string, email: string) => Promise<AdminUser>;
+  update: (
+    id: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    permissions: string[]
+  ) => Promise<AdminUser>;
   delete: (id: number) => Promise<void>;
 }

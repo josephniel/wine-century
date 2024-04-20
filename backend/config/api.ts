@@ -6,6 +6,8 @@ export interface APIConfig {
 export const loadAPIConfig = (): APIConfig => {
   return {
     port: Number(process.env['API_PORT'] ?? 3030),
-    corsAllowList: (process.env['API_CORS_ALLOW_LIST'] ?? 'http://localhost:3000').split(',')
+    corsAllowList: (
+      process.env['API_CORS_ALLOW_LIST'] ?? 'http://localhost:3000,http://localhost:3001'
+    ).split(',')
   };
 };

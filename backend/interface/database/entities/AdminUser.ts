@@ -4,6 +4,7 @@ export interface AdminUser {
   lastName: string;
   email: string;
   hashedPassword: string;
+  permissions: string[];
   createdAt: Date;
   updatedAt: Date;
 }

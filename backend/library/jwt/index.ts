@@ -6,6 +6,7 @@ export interface JWTUser {
   firstName: string;
   lastName: string;
   email: string;
+  permissions: string[];
 }
 
 export const sign = (user: JWTUser, passwordHash: string): string => {

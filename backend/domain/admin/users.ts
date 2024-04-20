@@ -35,7 +35,8 @@ export class UsersHandler {
           id: user.id,
           firstName: user.firstName,
           lastName: user.lastName,
-          email: user.email
+          email: user.email,
+          permissions: user.permissions
         })
       ),
       hasMore
@@ -47,7 +48,8 @@ export class UsersHandler {
       editUserRequest.id,
       editUserRequest.firstName,
       editUserRequest.lastName,
-      editUserRequest.email
+      editUserRequest.email,
+      editUserRequest.permissions
     );
 
     const response: EditUserResponse = {
@@ -55,6 +57,7 @@ export class UsersHandler {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
+      permissions: user.permissions,
       createdAt: user.createdAt.toISOString(),
       updatedAt: user.updatedAt.toISOString()
     };
