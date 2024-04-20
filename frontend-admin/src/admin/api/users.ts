@@ -31,7 +31,8 @@ export const editUser = async (token: string | null, user: User): Promise<void> 
     {
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.email
+      email: user.email,
+      permissions: user.permissions
     },
     {
       headers: {

@@ -32,7 +32,8 @@ export class AccessHandler {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
-        email: user.email
+        email: user.email,
+        permissions: user.permissions
       },
       user.hashedPassword
     );
@@ -45,7 +46,8 @@ export class AccessHandler {
       signupRequest.firstName,
       signupRequest.lastName,
       signupRequest.email,
-      hashedPassword
+      hashedPassword,
+      signupRequest.permissions
     );
 
     const response: SignupResponse = {

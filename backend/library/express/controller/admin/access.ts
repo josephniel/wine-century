@@ -2,6 +2,7 @@ import { HttpStatusCode } from 'axios';
 import { type Request, type Response } from 'express';
 
 import { type AccessHandler } from '../../../../domain/admin/access';
+import SignupRequestValidationError from '../../../../domain/errors/SignupRequestValidationError';
 import {
   type LoginRequest,
   type LoginResponse,
@@ -26,6 +27,22 @@ export class AccessController {
 
   signupRequestHandler = async (request: Request, response: Response): Promise<void> => {
     const body = request.body as SignupRequest;
+
+    if (body.firstName === '') {
+      throw new SignupRequestValidationError('Attribute `firstName` is required');
+    }
+    if (body.lastName === '') {
+      throw new SignupRequestValidationError('Attribute `lastName` is required');
+    }
+    if (body.email === '') {
+      throw new SignupRequestValidationError('Attribute `email` is required');
+    }
+    if (body.password === '') {
+      throw new SignupRequestValidationError('Attribute `password` is required');
+    }
+    if (body.permissions.length === 0) {
+      throw new SignupRequestValidationError('Attribute `permissions` is required');
+    }
 
     const responseBody: SignupResponse = await this.accessHandler.signup(body);
 
