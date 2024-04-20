@@ -1,10 +1,10 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import customerRoutes from './customer/routes';
+import adminRoutes from './admin/routes';
 
 const Router = (): React.ReactElement => {
-  const router = createBrowserRouter([customerRoutes]);
+  const router = createBrowserRouter([adminRoutes]);
   return <RouterProvider router={router} />;
 };
 

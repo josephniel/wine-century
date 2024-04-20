@@ -11,9 +11,8 @@ import AuthProvider, { useAuth } from './providers/AuthProvider';
 
 const NonAuthenticatedRoute = (): React.ReactElement | null => {
   const { token } = useAuth();
-
   if (token !== null) {
-    return <Navigate to="/admin/dashboard" />;
+    return <Navigate to="/dashboard" />;
   }
   return <Outlet />;
 };
@@ -21,7 +20,7 @@ const NonAuthenticatedRoute = (): React.ReactElement | null => {
 const AuthenticatedRoute = (): React.ReactElement | null => {
   const { token } = useAuth();
   if (token === null) {
-    return <Navigate to="/admin/login" />;
+    return <Navigate to="/login" />;
   }
   return <Outlet />;
 };
@@ -39,11 +38,15 @@ export default {
       element: <NonAuthenticatedRoute />,
       children: [
         {
-          path: '/admin/login',
+          path: '/',
+          element: <Navigate to="/login" />
+        },
+        {
+          path: '/login',
           element: <LoginPage />
         },
         {
-          path: '/admin/*',
+          path: '/*',
           element: <div>404 not found</div>
         }
       ]
@@ -52,27 +55,31 @@ export default {
       element: <AuthenticatedRoute />,
       children: [
         {
-          path: '/admin/logout',
+          path: '/',
+          element: <Navigate to="/dashboard" />
+        },
+        {
+          path: '/logout',
           element: <LogoutPage />
         },
         {
-          path: '/admin/dashboard',
+          path: '/dashboard',
           element: <DashboardPage />
         },
         {
-          path: '/admin/products',
+          path: '/products',
           element: <ProductsPage />
         },
         {
-          path: '/admin/users',
+          path: '/users',
           element: <UsersPage />
         },
         {
-          path: '/admin/users/register',
+          path: '/users/register',
           element: <UserRegisterPage />
         },
         {
-          path: '/admin/*',
+          path: '/*',
           element: <div>404 not found</div>
         }
       ]
