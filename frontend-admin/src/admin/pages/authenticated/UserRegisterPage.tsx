@@ -45,7 +45,7 @@ const UserRegisterPage = (): React.ReactElement => {
   };
 
   return redirect ? (
-    <Navigate to="/admin/users" />
+    <Navigate to="/users" />
   ) : (
     <section className="userRegisterPage">
       <RouterForm noValidate method="post" onSubmit={handleSubmit} id="registerUserForm">

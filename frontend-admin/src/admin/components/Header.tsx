@@ -10,8 +10,8 @@ import { getUserFromAuth } from '../providers/AuthProvider';
 const Header: React.FC = () => {
   const user = getUserFromAuth();
 
-  const profileLink = `/admin/profile/${user?.id}`;
-  const logoutURL = '/admin/logout';
+  const profileLink = `/profile/${user?.id}`;
+  const logoutURL = '/logout';
 
   return (
     <Navbar expand="lg" className="header bg-body-secondary">
@@ -21,8 +21,8 @@ const Header: React.FC = () => {
           <>
             <Navbar.Collapse>
               <Nav>
-                <Nav.Link href="/admin/products">Products</Nav.Link>
-                <Nav.Link href="/admin/users">Users</Nav.Link>
+                <Nav.Link href="/products">Products</Nav.Link>
+                <Nav.Link href="/users">Users</Nav.Link>
               </Nav>
             </Navbar.Collapse>
             <Navbar.Collapse className="justify-content-end">

@@ -161,7 +161,7 @@ const UsersPage = (): React.ReactElement => {
             <h3 className="mb-4">Admin Users</h3>
           </Col>
           <Col>
-            <Button variant="success" className="float-end" href="/admin/users/register">
+            <Button variant="success" className="float-end" href="/users/register">
               Add new user
             </Button>
           </Col>

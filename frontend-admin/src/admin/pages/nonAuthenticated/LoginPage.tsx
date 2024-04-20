@@ -38,7 +38,7 @@ const LoginPage: React.FC = () => {
   };
 
   return redirect ? (
-    <Navigate to="/admin/dashboard" />
+    <Navigate to="/dashboard" />
   ) : (
     <section className="loginPage">
       <RouterForm onSubmit={handleSubmit} className="loginForm bg-body-secondary">
