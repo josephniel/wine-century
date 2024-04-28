@@ -1,13 +1,5 @@
 import image1 from '../assets/carousel/image1.png';
 import image2 from '../assets/carousel/image2.png';
-import brandyImage from '../assets/categories/brandy.png';
-import ginImage from '../assets/categories/gin.png';
-import liqueurImage from '../assets/categories/liqueur.png';
-import scotchImage from '../assets/categories/scotch.png';
-import tequilaImage from '../assets/categories/tequila.png';
-import vodkaImage from '../assets/categories/vodka.png';
-import whiskyImage from '../assets/categories/whisky.png';
-import wineImage from '../assets/categories/wine.png';
 import headingImage1 from '../assets/middle-banner.jpg';
 import product1 from '../assets/products/product1.png';
 import product2 from '../assets/products/product2.png';
@@ -40,42 +32,42 @@ export const loader = async (): Promise<HomePageData> => {
       categories: [
         {
           name: 'Whisky',
-          image: whiskyImage,
+          image: 'https://cdn.winecenturybros.com/images/static/whisky.png',
           link: '/products?type=whisky'
         },
         {
           name: 'Scotch',
-          image: scotchImage,
+          image: 'https://cdn.winecenturybros.com/images/static/scotch.png',
           link: '/products?type=scotch'
         },
         {
           name: 'Brandy',
-          image: brandyImage,
+          image: 'https://cdn.winecenturybros.com/images/static/brandy.png',
           link: '/products?type=brandy'
         },
         {
           name: 'Tequila',
-          image: tequilaImage,
+          image: 'https://cdn.winecenturybros.com/images/static/tequila.png',
           link: '/products?type=tequila'
         },
         {
           name: 'Vodka',
-          image: vodkaImage,
+          image: 'https://cdn.winecenturybros.com/images/static/vodka.png',
           link: '/products?type=vodka'
         },
         {
           name: 'Gin',
-          image: ginImage,
+          image: 'https://cdn.winecenturybros.com/images/static/gin.png',
           link: '/products?type=gin'
         },
         {
           name: 'Wine',
-          image: wineImage,
+          image: 'https://cdn.winecenturybros.com/images/static/wine.png',
           link: '/products?type=wine'
         },
         {
           name: 'Liqueurs',
-          image: liqueurImage,
+          image: 'https://cdn.winecenturybros.com/images/static/liqueur.png',
           link: '/products?type=liqueurs'
         }
       ]
