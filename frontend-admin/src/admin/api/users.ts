@@ -111,6 +111,7 @@ export interface RegisterUser {
   lastName: string;
   email: string;
   password: string;
+  permissions: string[];
 }
 
 export const registerUser = async (token: string | null, user: RegisterUser): Promise<void> => {

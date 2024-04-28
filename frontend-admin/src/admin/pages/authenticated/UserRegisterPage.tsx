@@ -1,11 +1,12 @@
 import './UserRegisterPage.scss';
 
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import PasswordChecklist from 'react-password-checklist';
-import { Form as RouterForm, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { registerUser } from '../../api/users';
+import { USER_PERMISSIONS } from '../../data/user';
 import { useAuth } from '../../providers/AuthProvider';
 
 const UserRegisterPage = (): React.ReactElement => {
@@ -14,41 +15,52 @@ const UserRegisterPage = (): React.ReactElement => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordAgain, setPasswordAgain] = useState('');
+  const [permissions, setPermissions] = useState([] as string[]);
+
+  const { token } = useAuth();
+
+  const permissionOptions = Object.values(USER_PERMISSIONS).map((option: string) => ({
+    value: option,
+    selected: false
+  }));
+  const [statedPermissionOptions, setStatedPermissionOptions] = useState(permissionOptions);
 
   const [isPasswordValid, setIsPasswordValid] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
-  const handleSubmit = (event: any): void => {
-    event.preventDefault();
-    event.stopPropagation();
+  useEffect(() => {
+    setPermissions(
+      statedPermissionOptions
+        .filter((option: any) => option.selected)
+        .map((option: any) => option.value)
+    );
+  }, [statedPermissionOptions]);
 
-    const form = document.getElementById('registerUserForm') as HTMLFormElement;
-    if (!form.checkValidity()) {
-      return;
-    }
-
+  const addUserHandler = async (): Promise<void> => {
     if (!isPasswordValid) {
       return;
     }
 
-    const { token } = useAuth();
-    registerUser(token, {
-      firstName,
-      lastName,
-      email,
-      password
-    })
-      .then(() => {
-        setRedirect(true);
-      })
-      .catch(console.error);
+    try {
+      await registerUser(token, {
+        firstName,
+        lastName,
+        email,
+        password,
+        permissions
+      });
+    } catch (e) {
+      console.log(e);
+      return;
+    }
+    setRedirect(true);
   };
 
   return redirect ? (
     <Navigate to="/users" />
   ) : (
     <section className="userRegisterPage">
-      <RouterForm noValidate method="post" onSubmit={handleSubmit} id="registerUserForm">
+      <div className="registerUserForm">
         <h2 className="mb-4">Add new user</h2>
         <Row className="mb-3">
           <Form.Group as={Col} md="6" controlId="formBasicFirstName">
@@ -137,10 +149,38 @@ const UserRegisterPage = (): React.ReactElement => {
             setIsPasswordValid(isValid);
           }}
         />
-        <Button variant="primary" type="submit">
+        <Row className="mb-3">
+          <Form.Group as={Col} md="12" controlId="formBasicEmail">
+            <Form.Label>Permissions</Form.Label>
+            {statedPermissionOptions.map((permission: any, index: number) => (
+              <Form.Check // prettier-ignore
+                key={index}
+                type="switch"
+                label={permission.value}
+                value={permission.value}
+                checked={permission.selected}
+                onChange={({ target: { value } }) => {
+                  const tempPermissionOptions = [];
+                  for (const permission of statedPermissionOptions) {
+                    if (permission.value === value) {
+                      permission.selected = !permission.selected;
+                    }
+                    tempPermissionOptions.push(permission);
+                  }
+                  setStatedPermissionOptions(tempPermissionOptions);
+                }}
+              />
+            ))}
+          </Form.Group>
+        </Row>
+        <Button
+          variant="primary"
+          onClick={() => {
+            void addUserHandler();
+          }}>
           Submit
         </Button>
-      </RouterForm>
+      </div>
     </section>
   );
 };
