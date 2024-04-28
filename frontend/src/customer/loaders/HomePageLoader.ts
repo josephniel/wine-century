@@ -1,3 +1,4 @@
+import { getProductCategories } from '../api/products';
 import image1 from '../assets/carousel/image1.png';
 import image2 from '../assets/carousel/image2.png';
 import headingImage1 from '../assets/middle-banner.jpg';
@@ -17,6 +18,8 @@ export interface HomePageData {
 }
 
 export const loader = async (): Promise<HomePageData> => {
+  const productCategories = await getProductCategories();
+
   return {
     headerBannerProps: {
       images: [
@@ -28,50 +31,7 @@ export const loader = async (): Promise<HomePageData> => {
         { link: image1, name: 'image 1' }
       ]
     },
-    productCategories: {
-      categories: [
-        {
-          name: 'Whisky',
-          image: 'https://cdn.winecenturybros.com/images/static/whisky.png',
-          link: '/products?type=whisky'
-        },
-        {
-          name: 'Scotch',
-          image: 'https://cdn.winecenturybros.com/images/static/scotch.png',
-          link: '/products?type=scotch'
-        },
-        {
-          name: 'Brandy',
-          image: 'https://cdn.winecenturybros.com/images/static/brandy.png',
-          link: '/products?type=brandy'
-        },
-        {
-          name: 'Tequila',
-          image: 'https://cdn.winecenturybros.com/images/static/tequila.png',
-          link: '/products?type=tequila'
-        },
-        {
-          name: 'Vodka',
-          image: 'https://cdn.winecenturybros.com/images/static/vodka.png',
-          link: '/products?type=vodka'
-        },
-        {
-          name: 'Gin',
-          image: 'https://cdn.winecenturybros.com/images/static/gin.png',
-          link: '/products?type=gin'
-        },
-        {
-          name: 'Wine',
-          image: 'https://cdn.winecenturybros.com/images/static/wine.png',
-          link: '/products?type=wine'
-        },
-        {
-          name: 'Liqueurs',
-          image: 'https://cdn.winecenturybros.com/images/static/liqueur.png',
-          link: '/products?type=liqueurs'
-        }
-      ]
-    },
+    productCategories,
     bestSellerList: {
       title: 'Best Sellers',
       viewAllLink: '',
