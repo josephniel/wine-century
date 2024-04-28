@@ -9,6 +9,7 @@ import { type Database } from '../../interface/database';
 import { type Logger } from '../logger';
 import { errorMiddleware } from './middleware/error';
 import adminRouter from './routes/admin';
+import publicRouter from './routes/public';
 
 export class ExpressAPI {
   private readonly express: Express;
@@ -58,6 +59,7 @@ const createExpressApp = (
 
   // Register routes
   app.use('/admin', adminRouter(database, cache));
+  app.use('/public', publicRouter(database));
 
   app.use(errorMiddleware(logger));
 

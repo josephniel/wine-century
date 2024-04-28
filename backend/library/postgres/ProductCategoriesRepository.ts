@@ -26,6 +26,7 @@ RETURNING *;
       const productCategory: ProductCategory = {
         id: dbProductCategory.id,
         name: dbProductCategory.name,
+        imageLink: dbProductCategory.image_link,
         createdAt: new Date(dbProductCategory.created_at as number)
       };
       return productCategory;
@@ -53,6 +54,7 @@ SELECT * FROM product_categories WHERE id = $1;
     const productCategory: ProductCategory = {
       id: dbProductCategory.id,
       name: dbProductCategory.name,
+      imageLink: dbProductCategory.image_link,
       createdAt: new Date(dbProductCategory.created_at as number)
     };
     return productCategory;
@@ -69,6 +71,7 @@ SELECT * FROM product_categories ORDER BY id ASC;
     return result.map((dbProductCategory: any) => ({
       id: dbProductCategory.id,
       name: dbProductCategory.name,
+      imageLink: dbProductCategory.image_link,
       createdAt: new Date(dbProductCategory.created_at as number)
     }));
   };
@@ -90,6 +93,7 @@ RETURNING *;
       const productCategory: ProductCategory = {
         id: dbProductCategory.id,
         name: dbProductCategory.name,
+        imageLink: dbProductCategory.image_link,
         createdAt: new Date(dbProductCategory.created_at as number)
       };
       return productCategory;

@@ -2,18 +2,17 @@ import './ProductCategories.scss';
 
 interface CategoryProps {
   name: string;
-  image: string;
-  link: string;
+  imageLink: string;
 }
 
 export interface ProductCategoriesProps {
-  categories: CategoryProps[];
+  productCategories: CategoryProps[];
 }
 
 const Category: React.FC<CategoryProps> = (props: CategoryProps) => (
-  <a href={props.link}>
+  <a href={props.name.toLowerCase()}>
     <div className="category">
-      <img src={props.image} alt={props.name} />
+      <img src={props.imageLink} alt={props.name} />
       <span>{props.name}</span>
     </div>
   </a>
@@ -25,7 +24,7 @@ const ProductCategories: React.FC<ProductCategoriesProps> = (props: ProductCateg
       <b>PRODUCT CATEGORIES</b>
     </div>
     <div className="body">
-      {props.categories.map((category: CategoryProps, index: number) => (
+      {props.productCategories.map((category: CategoryProps, index: number) => (
         <Category key={index} {...category} />
       ))}
     </div>

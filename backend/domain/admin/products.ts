@@ -128,6 +128,7 @@ export class ProductsHandler {
     const response: CreateProductCategoryResponse = {
       id: product.id,
       name: product.name,
+      imageLink: product.imageLink,
       createdAt: product.createdAt.toISOString()
     };
     return response;
@@ -141,6 +142,7 @@ export class ProductsHandler {
     const response: GetProductCategoryResponse = {
       id: product.id,
       name: product.name,
+      imageLink: product.imageLink,
       createdAt: product.createdAt.toISOString()
     };
     return response;
@@ -154,6 +156,7 @@ export class ProductsHandler {
         (productCategory: DBProductCategory): ProductCategory => ({
           id: productCategory.id,
           name: productCategory.name,
+          imageLink: productCategory.imageLink,
           createdAt: productCategory.createdAt.toISOString()
         })
       ),
@@ -169,6 +172,7 @@ export class ProductsHandler {
     const response: EditProductCategoryResponse = {
       id: product.id,
       name: product.name,
+      imageLink: product.imageLink,
       createdAt: product.createdAt.toISOString()
     };
     return response;

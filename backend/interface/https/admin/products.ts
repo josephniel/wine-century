@@ -49,6 +49,7 @@ export interface DeleteProductRequest {
 export interface ProductCategory {
   id: number;
   name: string;
+  imageLink: string;
   createdAt: string;
 }
 
