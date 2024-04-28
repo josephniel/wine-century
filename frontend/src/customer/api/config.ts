@@ -1,3 +1,3 @@
 export default {
-  backend_url: 'http://localhost:3030'
+  backend_url: 'https://api.winecenturybros.com'
 };
