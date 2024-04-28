@@ -10,7 +10,7 @@ export interface ProductCategoriesProps {
 }
 
 const Category: React.FC<CategoryProps> = (props: CategoryProps) => (
-  <a href={props.name.toLowerCase()}>
+  <a href={`/products/${props.name.replaceAll(' ', '-').toLowerCase()}`}>
     <div className="category">
       <img src={props.imageLink} alt={props.name} />
       <span>{props.name}</span>
