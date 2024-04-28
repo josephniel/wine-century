@@ -3,6 +3,12 @@ import { Router } from 'express';
 import { AccessHandler } from '../../../domain/admin/access';
 import { ProductsHandler } from '../../../domain/admin/products';
 import { UsersHandler } from '../../../domain/admin/users';
+import {
+  AddUserPermission,
+  DeleteUserPermission,
+  EditUserPermission,
+  ViewUserPermission
+} from '../../../domain/permissions/UserPermissions';
 import { type Cache } from '../../../interface/cache';
 import { type Database } from '../../../interface/database';
 import { type AdminUserRepository } from '../../../interface/database/repositories/AdminUserRepository';
@@ -42,7 +48,7 @@ const registerAccessRoutes = (
   router.post('/login', asyncHandler(accessController.loginRequestHandler));
   router.post(
     '/register',
-    authMiddleware(cache),
+    authMiddleware(cache)([AddUserPermission]),
     asyncHandler(accessController.signupRequestHandler)
   );
 };
@@ -55,15 +61,19 @@ const registerUserRoutes = (
   const usersHandler = new UsersHandler(adminUserRepo);
   const usersController = new UsersController(usersHandler);
 
-  router.get('/users', authMiddleware(cache), asyncHandler(usersController.listRequestHandler));
+  router.get(
+    '/users',
+    authMiddleware(cache)([ViewUserPermission]),
+    asyncHandler(usersController.listRequestHandler)
+  );
   router.put(
     '/users/:userID',
-    authMiddleware(cache),
+    authMiddleware(cache)([EditUserPermission]),
     asyncHandler(usersController.editRequestHandler)
   );
   router.delete(
     '/users/:userID',
-    authMiddleware(cache),
+    authMiddleware(cache)([DeleteUserPermission]),
     asyncHandler(usersController.deleteRequestHandler)
   );
 };
@@ -79,53 +89,53 @@ const registerProductRoutes = (
 
   router.post(
     '/products/categories',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.createProductCategoryRequestHandler)
   );
   router.get(
     '/products/categories/:productCategoryID',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.getProductCategoryByIDRequestHandler)
   );
   router.get(
     '/products/categories',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.listProductCategoriesRequestHandler)
   );
   router.put(
     '/products/categories/:productCategoryID',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.editProductCategoryRequestHandler)
   );
   router.delete(
     '/products/categories/:productCategoryID',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.deleteProductCategoryRequestHandler)
   );
 
   router.post(
     '/products',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.createProductRequestHandler)
   );
   router.get(
     '/products/:productID',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.getProductByIDRequestHandler)
   );
   router.get(
     '/products',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.listProductsRequestHandler)
   );
   router.put(
     '/products/:productID',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.editProductRequestHandler)
   );
   router.delete(
     '/products/:productID',
-    authMiddleware(cache),
+    authMiddleware(cache)([]),
     asyncHandler(productsController.deleteProductRequestHandler)
   );
 };

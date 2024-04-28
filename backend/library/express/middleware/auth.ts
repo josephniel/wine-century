@@ -1,12 +1,15 @@
 import { type NextFunction, type Request, type Response } from 'express';
 
 import AuthorizationInvalidError from '../../../domain/errors/AuthorizationInvalidError';
+import AuthorizationNotAllowedError from '../../../domain/errors/AuthorizationNotAllowedError';
 import AuthorizationRequiredError from '../../../domain/errors/AuthorizationRequiredError';
+import { type Permission } from '../../../domain/permissions';
 import { type Cache } from '../../../interface/cache';
 import jwt from '../../jwt';
 
 export const authMiddleware =
   (cache: Cache) =>
+  (permissions: Permission[]) =>
   (request: Request, _: Response, next: NextFunction): void => {
     const authHeader: string | undefined = request.get('Authorization');
     if (authHeader === undefined) {
@@ -29,6 +32,12 @@ export const authMiddleware =
     const isValid = jwt.verify(token, cachedValue);
     if (!isValid) {
       throw new AuthorizationInvalidError();
+    }
+
+    for (const permission of permissions) {
+      if (!decodedUser.permissions.includes(permission.code)) {
+        throw new AuthorizationNotAllowedError();
+      }
     }
 
     request.headers['x-user-id'] = decodedUser.id.toString();
